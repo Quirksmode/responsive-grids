@@ -1,0 +1,64 @@
+/**
+ * @group css.base.helpers
+ *
+ * Here we define the reusable helper classes
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__base/_helpers.scss";
+ *
+ */
+
+/**
+ * Clearfix
+ */
+
+.cf {
+  zoom: 1;
+	&:before, &:after { content: ""; display: table; }
+	&:after { clear: both; }
+}
+
+
+/**
+* Hidden - Hide from both screenreaders and browsers:
+*/
+
+.hdn {
+    display: none;
+    visibility: hidden;
+}
+
+
+/**
+* Visually Hidden
+*/
+
+.vhdn {
+    @include vhdn;
+}
+
+.vhdn-off {
+    @include vhdn-off;
+}
+
+
+/**
+* Visually Hidden on Focus - Extends the .vhdn class to allow the element to be focusable
+*/
+
+.vhdn.focus:active,
+.vhdn.focus:focus {
+	@include vhdn-off;
+}
+
+
+/**
+* Invisible - Hide visually and from screen readers, but maintain layout
+*/
+
+.invs {
+    visibility: hidden;
+}

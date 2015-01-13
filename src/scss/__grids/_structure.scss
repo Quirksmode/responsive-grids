@@ -1,0 +1,39 @@
+
+/*------------------------------------*
+    VARIABLES
+/*------------------------------------*
+ *
+ * Edit these variables to define your grids. You can define your columns below
+ * Please ensure the pixels round up correctly.
+ * To calculate your grids Use http://gridcalculator.dk/
+ * Note: Gutter and Margin labels are around the wrong way on the site.
+ */
+
+
+
+// $totalWidth: 1280px;
+// $gutterWidth: 42px;
+// $marginWidth: 16px;
+// $columns: 12;
+
+@import "grid";
+
+
+
+@include create_grid_structure("structure-inner", 1100px, 2px, 10px, 12);
+
+.structure-inner {
+    background-color: red;
+}
+
+
+
+
+@include create_grid_structure("structure-outer", 1280px, 42px, 16px, 6);
+
+.structure-outer {
+    background-color: #FFC;
+}
+
+
+

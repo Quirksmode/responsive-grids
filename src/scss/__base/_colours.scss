@@ -1,0 +1,21 @@
+/**
+ * Here we define the colour variables that are used throughout the other stylesheets
+
+ * @group css.base.colours
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__base/_colours.scss";
+ *
+ */
+
+
+/**
+ * @group css.base.colours
+ * @param {color} $color-grey-1
+ */
+$color-example: #A2A2A2;
+
+

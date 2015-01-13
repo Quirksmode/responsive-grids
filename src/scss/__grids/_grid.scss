@@ -1,0 +1,86 @@
+
+@mixin create_grid_structure(
+    $className,
+    $total_Width,
+    $gutter_Width,
+    $margin_Width,
+    $col
+    ) {
+
+    $totalWidth: $total_Width;
+    $marginWidth: $margin_Width;
+    $columns: $col;
+
+    $gutterWidth: $gutter_Width * 2; // px
+    $contentWidth: $totalWidth - $gutterWidth; // px
+    $structureWidth: $contentWidth + $gutterWidth; // px
+    $gridWidth: $contentWidth + $marginWidth; // px
+    $margin: ((($marginWidth / 2) / $gridWidth) * 100%); // %
+    $structureGutter: ($gutterWidth / $structureWidth) * 100%; // %
+
+    $num: $gutterWidth - $marginWidth;
+
+    // if gutter width is less than margin width by half then
+    // margin width is not required to in the calculation 
+    @if $num < 0 {
+        $num: $gutterWidth;
+    }
+ 
+    $gridGutter: ($num / $structureWidth) * 100%; // %
+
+    .#{$className} {
+        margin: 0 auto;
+        width: 100% - $structureGutter;
+        max-width: $contentWidth;
+
+        &.grid {
+            width: 100% - $gridGutter;
+            max-width: $gridWidth;
+        }
+
+        &:after {
+            @extend .cf;
+        }
+
+        // Mobile - all col elements 100%
+        [class*='col-'] {
+          margin: 0 $margin ($margin*2);
+          @include calcWidth(12, 12, $margin);
+        }
+
+
+        @include mq($from: tablet) {
+
+            // Let's float these cols
+            [class*='col-'] {
+              float: left;
+            }
+
+            .i-b {
+                [class*='col-'] {
+                  float: none;
+                  display: inline-block;
+                  vertical-align: top;
+                }
+            }
+
+            @include calcColumns($columns, $margin);
+        }
+    }
+}
+
+
+
+@mixin calcWidth($columnCount, $totalColumns, $margin) {
+    $columnWidth: (100% - (($margin * 2) * $totalColumns)) / $totalColumns;
+    width: ($columnCount * $columnWidth) + (($margin * 2) * ($columnCount - 1));
+}
+
+@mixin calcColumns($numberOfColumns, $margin) {
+    @for $i from 1 through $numberOfColumns {
+        .col-#{$i}-#{$numberOfColumns} {
+            $columnWidth: (100% - (($margin * 2) * $numberOfColumns)) / $numberOfColumns;
+            width: ($i * $columnWidth) + (($margin * 2) * ($i - 1));
+        }
+    }
+}

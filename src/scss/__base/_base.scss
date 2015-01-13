@@ -1,0 +1,98 @@
+/**
+ * This is for the remaining base/globally applied styles that cannot be defined in the other Base folder stylesheets (e.g. colours, fonts etc.)
+ *
+ * @group css.base.base
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__base/base";
+ *
+ */
+
+
+/**
+ * Custom Resets
+ */
+ p, pre, blockquote, a, ul, ol, li, h1, h2, h3, h4, h5, h6, figure {
+    margin:0;
+    padding:0;
+}
+
+/**
+ * body styling
+ */
+body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+img {
+    // Responsive images
+    max-width: 100%; // Overide with width: 100% on case by case basis to allow images to fill their container
+    height: auto;
+    display:block;
+}
+
+/**
+* Fix the box sizing
+*/
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+
+/**
+* Accessibility Links
+*/
+
+.acc-links {
+    top:80px;
+    left: 10px;
+    position: absolute;
+    z-index: 500;
+}
+
+.acc-links li a {
+	@include font(26, 30);
+    opacity: 0.7;
+    color:#fff;
+    background:#000;
+    padding:10px;
+}
+
+
+/**
+* No Javascript/Browser Message
+*/
+
+.no-browser,
+.no-script {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #000;
+    color: #000;
+    display: block;
+    padding: 50px 20px;
+    text-align: center;
+    position:relative;
+    z-index: 999;
+
+    p {
+        @include font(22, 28);
+    }
+
+    a {
+        color: blue;
+    }
+}
+
+.test {
+    transition: all 1s;
+}
+

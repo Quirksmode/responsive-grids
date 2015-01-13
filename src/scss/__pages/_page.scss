@@ -1,0 +1,21 @@
+/**
+ * @group css.pages.page
+ *
+ * Use this for default page styles that apply to all pages
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__pages/page";
+ *
+ */
+
+.page {
+
+    > div {
+        height: 300px;
+        background-color: #333;
+    }
+
+}

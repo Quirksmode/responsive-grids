@@ -1,0 +1,16 @@
+/**
+ * @group css.base.forms
+ *
+ * This is for the remaining base/globally applied styles that cannot be defined in the other Base folder stylesheets (e.g. colours, fonts etc.)
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__base/forms";
+ *
+ */
+
+// Shared form styles should go here
+.forms {}
+
