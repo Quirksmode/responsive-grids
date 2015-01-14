@@ -7,17 +7,17 @@
  * Please ensure the pixels round up correctly.
  * To calculate your grids Use http://gridcalculator.dk/
  * Note: Gutter and Margin labels are around the wrong way on the site.
+ *
+ *
+ *
+ *
+ * @include create_grid_structure("className", "Width", "gutterWidth", "marginWidth", "numberOfColumns")
+ *
+ * example: @include create_grid_structure("structure", 1100px, 2px, 10px, 12);
  */
 
 
-
-// $totalWidth: 1280px;
-// $gutterWidth: 42px;
-// $marginWidth: 16px;
-// $columns: 12;
-
 @import "grid";
-
 
 
 @include create_grid_structure("structure-inner", 1100px, 2px, 10px, 12);
@@ -28,11 +28,10 @@
 
 
 
+@include create_grid_structure();
 
-@include create_grid_structure("structure-outer", 1280px, 42px, 16px, 6);
-
-.structure-outer {
-    background-color: #FFC;
+.structure {
+    background-color: blue;
 }
 
 
