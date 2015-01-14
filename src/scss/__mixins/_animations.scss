@@ -1,0 +1,38 @@
+/**
+ * @group css.mixins.animations
+ *
+ * Here we define the reusable helper mixins
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__mixins/_animations.scss";
+ */
+
+/**
+ * Font
+ * 
+ * @param {string} $animation
+ * @param {number} $duration
+ * @param {type} $timing (ease)
+ * @param {number} $delay (0)
+ * @param {type} $iteration (initial)
+ * @param {type} $direction (normal)
+ * @param {type} $playstate (running)
+ * @param {type} $fillmode (forwards)
+ * 
+ * @example
+ *     @include animation(changecolour, 5s, linear, 0, infinite, normal, running);
+ *
+ */
+@mixin animation ($animation, $duration, $timing: ease, $delay: 0, $iteration: initial, $direction: normal, $playstate: running, $fillmode: forwards) {
+    animation-name: $animation;
+    animation-duration: $duration;
+    animation-timing-function: $timing;
+    animation-delay: $delay;
+    animation-iteration-count: $iteration;
+    animation-direction: $direction;
+    animation-play-state: $playstate;
+    animation-fill-mode: $fillmode;
+}

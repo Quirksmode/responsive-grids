@@ -1,0 +1,166 @@
+/**
+ * @group css.base.fonts
+ *
+ * Here we define the font styles
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__base/_fonts.scss";
+ *
+ */
+
+
+$nspcc-headline: 'nspcc-headline';
+$nspcc-regular: 'nspcc-regular';
+$nspcc-bold: 'nspcc-bold';
+$nspcc-semibold: 'nspcc-semibold';
+
+
+// nspcc-headline
+@font-face {
+    font-family: $nspcc-headline;
+    src:url('../fonts/headline/NSPCC-HeadlineTT.eot');
+    src:url('../fonts/headline/NSPCC-HeadlineTT.eot#iefix') format('embedded-opentype'),
+        url('../fonts/headline/NSPCC-HeadlineTT.woff') format('woff'),
+        url('../fonts/headline/NSPCC-HeadlineTT.ttf') format('truetype'),
+        url('../fonts/headline/NSPCC-Headline.svg') format('svg');
+}
+
+@font-face {
+    font-family: $nspcc-bold;
+    src:url('../fonts/bold/NSPCC-BoldTT.eot');
+    src:url('../fonts/bold/NSPCC-BoldTT.eot#iefix') format('embedded-opentype'),
+        url('../fonts/bold/NSPCC-BoldTT.woff') format('woff'),
+        url('../fonts/bold/NSPCC-BoldTT.ttf') format('truetype'),
+        url('../fonts/bold/NSPCC-Bold.svg') format('svg');
+}
+
+@font-face {
+    font-family: $nspcc-semibold;
+    src:url('../fonts/semibold/NSPCC-Semibold.eot');
+    src:url('../fonts/semibold/NSPCC-Semibold.eot#iefix') format('embedded-opentype'),
+        url('../fonts/semibold/NSPCC-Semibold.woff') format('woff'),
+        url('../fonts/semibold/NSPCC-Semibold.ttf') format('truetype'),
+        url('../fonts/semibold/NSPCC-Semibold.svg') format('svg');
+}
+
+@font-face {
+    font-family: $nspcc-regular;
+    src:url('../fonts/regular/NSPCC-RegularTT.eot');
+    src:url('../fonts/regular/NSPCC-RegularTT.eot#iefix') format('embedded-opentype'),
+        url('../fonts/regular/NSPCC-RegularTT.woff') format('woff'),
+        url('../fonts/regular/NSPCC-RegularTT.ttf') format('truetype'),
+        url('../fonts/regular/NSPCC-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+/**
+ * The globally used html styles are declared here
+ */
+html {
+	font-size: 62.5%;
+	-webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/**
+ * The globally used font styles are declared here
+ */
+body {
+	//font-family: $font-gotham-book;
+	//word-wrap: break-word;
+}
+
+/**
+ * h1 styles
+ */
+h1 {
+	//@include font(34, 38, $font-gotham-medium);
+    font-weight: normal;
+    color: #fff;
+
+    @include mq($from: tablet) {
+        @include font(42, 48);
+    }
+
+    @include mq($from: smalldesktop) {
+        @include font(56, 56);
+    }
+
+    @include mq($from: desktop) {
+        @include font(68, 72);
+    }
+}
+
+h2 {
+    //@include font(32, 36, $font-gotham-medium);
+    font-weight: 700;
+}
+h3 {
+    //@include font(28, 32, $font-gotham-medium);
+    font-weight: 700;
+}
+h4,
+h5,
+h6 {
+	//@include font(30, 34, $font-gotham-medium);
+}
+
+p,
+li {
+	@include font(16, 26);
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+select {
+    //font-family: $font-gotham-medium;
+    cursor: pointer;
+}
+
+// Font Animations
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+span {
+    transition: font 0.3s ease;
+}
+
+// Better font rendering
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+a,
+span,
+input,
+label,
+time,
+button,
+address {
+    @include anti-alias-text;
+}
+
+span,
+p {
+    font-family: Arial, Helvetica, Roboto;
+}
