@@ -17,10 +17,7 @@
  */
 
 
-@import "grid";
-
-
-@include create_grid_structure("structure-inner", 1100px, 2px, 10px, 12);
+@include create_grid_structure("structure-inner", 1100px, 2px, 10px, 12, "smalldesktop");
 
 .structure-inner {
     background-color: red;
@@ -28,7 +25,7 @@
 
 
 
-@include create_grid_structure();
+@include create_grid_structure("structure-outer");
 
 .structure {
     background-color: blue;

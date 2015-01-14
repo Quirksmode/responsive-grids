@@ -1,10 +1,11 @@
-git
+
 @mixin create_grid_structure(
     $className: 'structure',
     $total_Width: 1280px,
     $gutter_Width: 10px,
     $margin_Width: 10px,
-    $col: 0 
+    $col: 0,
+    $breakpoint: "tablet"
     ) { // defualt values if parameters not specified
 
     $totalWidth: $total_Width;
@@ -52,7 +53,7 @@ git
             }
 
 
-            @include mq($from: tablet) {
+            @include mq($from: $breakpoint) {
 
                 // Let's float these cols
                 [class*='col-'] {
@@ -74,15 +75,27 @@ git
 }
 
 
-
 @mixin calcWidth($columnCount, $totalColumns, $margin) {
     $columnWidth: (100% - (($margin * 2) * $totalColumns)) / $totalColumns;
     width: ($columnCount * $columnWidth) + (($margin * 2) * ($columnCount - 1));
 }
 
+
 @mixin calcColumns($numberOfColumns, $margin) {
+
     @for $i from 1 through $numberOfColumns {
-        .col-#{$i}-#{$numberOfColumns} {
+
+        // divide the number of columns into the increment number and look for a whole number 
+        $num: $numberOfColumns / $i;
+        $num2: round($numberOfColumns / $i);
+
+        $string: "";
+
+        @if $num == $num2 {
+            $string: ".col-1-#{$num}"
+        }
+
+        .col-#{$i}-#{$numberOfColumns}, #{$string} {
             $columnWidth: (100% - (($margin * 2) * $numberOfColumns)) / $numberOfColumns;
             width: ($i * $columnWidth) + (($margin * 2) * ($i - 1));
         }
