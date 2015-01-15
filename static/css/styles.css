@@ -695,8 +695,8 @@ th {
 /* line 18, ../../src/scss/__base/_helpers.scss */
 
 .cf,
-.structure-inner:after,
-.structure-outer:after {
+.structure:after,
+.structure-inner:after {
 	zoom: 1;
 }
 
@@ -704,8 +704,8 @@ th {
 
 .cf:before,
 .cf:after,
-.structure-inner:after,
-.structure-outer:after {
+.structure:after,
+.structure-inner:after {
 	content: "";
 	display: table;
 }
@@ -713,8 +713,8 @@ th {
 /* line 21, ../../src/scss/__base/_helpers.scss */
 
 .cf:after,
-.structure-inner:after,
-.structure-outer:after {
+.structure:after,
+.structure-inner:after {
 	clear: both;
 }
 
@@ -1106,14 +1106,45 @@ img {
  * Note: Gutter and Margin labels are around the wrong way on the site.
  *
  *
+ * @param {string} $total_Width
+ * @param {string} $gutter_Width
+ * @param {string} $margin_Width
+ * @param {string} $col
+ * @param {string} $breakpoint
  *
- *
- * @include create_grid_structure("className", "Width", "gutterWidth", "marginWidth", "numberOfColumns")
- *
- * example: @include create_grid_structure("structure", 1100px, 2px, 10px, 12);
+ * @example
+ *     @include create_grid_structure("structure", 1320px, 60px, 24px, 12, "tablet");
  */
 
-/* line 32, ../../src/scss/__mixins/_grid.scss */
+/* line 30, ../../src/scss/__mixins/_grid.scss */
+
+.structure {
+	margin: 0 auto;
+	width: 96.875%;
+	max-width: 1240px;
+}
+
+/* line 42, ../../src/scss/__mixins/_grid.scss */
+
+.structure.grid {
+	width: 98.4375%;
+	max-width: 1260px;
+}
+
+/* line 48, ../../src/scss/__mixins/_grid.scss */
+
+.structure [class*='col-'] {
+	margin: 0 0.79365% 1.5873%;
+	width: 98.4127%;
+}
+
+/* line 24, ../../src/scss/__grids/grids.scss */
+
+.structure {
+	background-color: blue;
+}
+
+/* line 30, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner {
 	margin: 0 auto;
@@ -1121,38 +1152,24 @@ img {
 	max-width: 1096px;
 }
 
-/* line 44, ../../src/scss/__mixins/_grid.scss */
+/* line 42, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner.grid {
 	width: 99.63636%;
 	max-width: 1106px;
 }
 
-/* line 50, ../../src/scss/__mixins/_grid.scss */
+/* line 48, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner [class*='col-'] {
 	margin: 0 0.45208% 0.90416%;
 	width: 99.09584%;
 }
 
-/* line 22, ../../src/scss/__grids/grids.scss */
+/* line 31, ../../src/scss/__grids/grids.scss */
 
 .structure-inner {
 	background-color: red;
-}
-
-/* line 32, ../../src/scss/__mixins/_grid.scss */
-
-.structure-outer {
-	margin: 0 auto;
-	width: 98.4375%;
-	max-width: 1260px;
-}
-
-/* line 30, ../../src/scss/__grids/grids.scss */
-
-.structure {
-	background-color: blue;
 }
 
 /**
@@ -1258,6 +1275,104 @@ h1 {
 	line-height: 4.8rem;
 }
 
+/* line 57, ../../src/scss/__mixins/_grid.scss */
+
+.structure [class*='col-'] {
+	float: left;
+}
+
+/* line 62, ../../src/scss/__mixins/_grid.scss */
+
+.structure.i-b {
+	font-size: 0;
+}
+
+/* line 65, ../../src/scss/__mixins/_grid.scss */
+
+.structure.i-b [class*='col-'] {
+	float: none;
+	display: inline-block;
+	vertical-align: top;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-1-12,
+.structure .col-1-12 {
+	width: 6.74603%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-2-12,
+.structure .col-1-6 {
+	width: 15.07937%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-3-12,
+.structure .col-1-4 {
+	width: 23.4127%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-4-12,
+.structure .col-1-3 {
+	width: 31.74603%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-5-12 {
+	width: 40.07937%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-6-12,
+.structure .col-1-2 {
+	width: 48.4127%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-7-12 {
+	width: 56.74603%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-8-12 {
+	width: 65.07937%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-9-12 {
+	width: 73.4127%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-10-12 {
+	width: 81.74603%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-11-12 {
+	width: 90.07937%;
+}
+
+/* line 99, ../../src/scss/__mixins/_grid.scss */
+
+.structure .col-12-12,
+.structure .col-1-1 {
+	width: 98.4127%;
+}
+
 }
 
 @media all and (min-width: 48.0625em) {
@@ -1269,92 +1384,98 @@ h1 {
 	line-height: 5.6rem;
 }
 
-/* line 59, ../../src/scss/__mixins/_grid.scss */
+/* line 57, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner [class*='col-'] {
 	float: left;
 }
 
-/* line 64, ../../src/scss/__mixins/_grid.scss */
+/* line 62, ../../src/scss/__mixins/_grid.scss */
 
-.structure-inner .i-b [class*='col-'] {
+.structure-inner.i-b {
+	font-size: 0;
+}
+
+/* line 65, ../../src/scss/__mixins/_grid.scss */
+
+.structure-inner.i-b [class*='col-'] {
 	float: none;
 	display: inline-block;
 	vertical-align: top;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-1-12,
 .structure-inner .col-1-12 {
 	width: 7.42917%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-2-12,
 .structure-inner .col-1-6 {
 	width: 15.76251%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-3-12,
 .structure-inner .col-1-4 {
 	width: 24.09584%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-4-12,
 .structure-inner .col-1-3 {
 	width: 32.42917%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-5-12 {
 	width: 40.76251%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-6-12,
 .structure-inner .col-1-2 {
 	width: 49.09584%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-7-12 {
 	width: 57.42917%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-8-12 {
 	width: 65.76251%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-9-12 {
 	width: 74.09584%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-10-12 {
 	width: 82.42917%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-11-12 {
 	width: 90.76251%;
 }
 
-/* line 98, ../../src/scss/__mixins/_grid.scss */
+/* line 99, ../../src/scss/__mixins/_grid.scss */
 
 .structure-inner .col-12-12,
 .structure-inner .col-1-1 {
