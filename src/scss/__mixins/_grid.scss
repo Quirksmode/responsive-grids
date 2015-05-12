@@ -1,36 +1,37 @@
 
+
+
 @mixin create_grid_structure(
     $className: 'structure',
-    $totalWidth: 1280px,
-    $gutterWidth: 10px,
-    $marginWidth: 10px,
+    $width: 1280px,
+    $gutter: 10px,
+    $margin: 10px,
     $columns: 0,
-    $breakpoint: "tablet"
+    $breakpoint: "tablet",
+    $nestedcolumns: 4,
+    $nestedGutter: 0px,
+    $nestedMargin: 2px
+
     ) { // defualt values if parameters not specified
 
-    $gutterWidth: $gutterWidth * 2; // px
-    $contentWidth: $totalWidth - $gutterWidth; // px
-    $structureWidth: $contentWidth + $gutterWidth; // px
-    $gridWidth: $contentWidth + $marginWidth; // px
-    $margin: ((($marginWidth / 2) / $gridWidth) * 100%); // %
-    $structureGutter: ($gutterWidth / $structureWidth) * 100%; // %
+    $gutter: $gutter * 2; // px
 
-    
-    // if gutter width is less than margin width by half then
-    // margin width is not required in the calculation
+    $structureWidth: $width - $gutter; // px
 
-    $num: $gutterWidth - $marginWidth;
+    $gutterWidth: -getGutterWidth($gutter, $width);
 
-    @if $num < 0 {
-        $num: $gutterWidth;
-    }
- 
-    $gridGutter: ($num / $structureWidth) * 100%; // %
+    $marginWidth: -getMarginWidth($margin, $structureWidth);
+
 
     .#{$className} {
         margin: 0 auto;
-        width: 100% - $structureGutter;
-        max-width: $contentWidth;
+        width: 100% - $gutterWidth;
+        max-width: $structureWidth;
+
+        &.grid {
+            max-width: $structureWidth + $margin;
+            width: (100% - $gutterWidth) + ($marginWidth * 2);
+        }
 
         &:after {
             @extend .cf;
@@ -39,17 +40,21 @@
 
         @if $columns > 1 {
 
-            &.grid {
-                width: 100% - $gridGutter;
-                max-width: $gridWidth;
-            }
-
-            // Mobile - all col elements 100%
+            // all col elements 100%
             [class*='col-'] {
-              margin: 0 $margin ($margin*2);
-              @include calcWidth(12, 12, $margin);
+              margin: 0 $marginWidth ($marginWidth*2);
+              width: -getWidth($columns, $columns, $marginWidth);
             }
 
+            [class*='col-'] .nested-grid {
+                margin: 0 auto;
+                width: -getWidth($columns, $columns, $marginWidth);
+            }
+
+            [class*='col-'] .nested-grid [class*='col-'] {
+                margin: 0 $marginWidth ($marginWidth*2);
+                width: -getWidth($columns, $columns, $marginWidth);
+            }
 
             @include mq($from: $breakpoint) {
 
@@ -69,20 +74,20 @@
                     }
                 }
 
-                @include calcColumns($columns, $margin);
+                @include calcColumns(
+                    $columns, 
+                    $marginWidth, 
+                    $nestedcolumns, 
+                    -getGutterWidth($nestedGutter, $width), 
+                    -getMarginWidth($nestedMargin, $structureWidth)
+                );
             }
         }
     }
 }
 
 
-@mixin calcWidth($columnCount, $totalColumns, $margin) {
-    $columnWidth: (100% - (($margin * 2) * $totalColumns)) / $totalColumns;
-    width: ($columnCount * $columnWidth) + (($margin * 2) * ($columnCount - 1));
-}
-
-
-@mixin calcColumns($numberOfColumns, $margin) {
+@mixin calcColumns($numberOfColumns, $margin, $nestedcolumns, $gutterWidth, $marginWidth) {
 
     @for $i from 1 through $numberOfColumns {
 
@@ -97,8 +102,64 @@
         }
 
         .col-#{$i}-#{$numberOfColumns}, #{$string} {
-            $columnWidth: (100% - (($margin * 2) * $numberOfColumns)) / $numberOfColumns;
-            width: ($i * $columnWidth) + (($margin * 2) * ($i - 1));
+            width: -getWidth($i, $numberOfColumns, $margin);
+
+        }
+
+        @if $nestedcolumns > 1 {
+        @include nestedColumns(
+                $i, 
+                $numberOfColumns, 
+                $nestedcolumns, 
+                $gutterWidth, 
+                $marginWidth
+            );
         }
     }
+}
+
+
+@mixin nestedColumns($index, $numberOfColumns, $nestedcolumns, $gutterWidth, $marginWidth) {
+    
+
+    .col-#{$index}-#{$numberOfColumns} .nested-grid {
+        margin: 0 auto;
+        width: 100% - $gutterWidth;
+    }
+
+    .col-#{$index}-#{$numberOfColumns} .nested-grid [class*='col-'] {
+        margin: 0 $marginWidth ($marginWidth*2);
+        //width: -getWidth($nestedcolumns, $nestedcolumns, $marginWidth);
+    }
+
+
+    @for $i from 1 through $nestedcolumns {
+
+        .col-#{$index}-#{$numberOfColumns} .nested-grid .col-#{$i}-4 {
+            width: -getWidth($i, $nestedcolumns, $marginWidth);
+        }
+    }   
+}
+
+
+/* *********************************************************
+ *
+ *
+ * FUNCTIONS
+ *
+ *
+ * *********************************************************/
+
+@function -getGutterWidth($gutter, $width) {
+    @return ($gutter / $width) * 100%; // %
+}
+
+@function -getMarginWidth($margin, $width) {
+    @return ((($margin / 2) / $width) * 100%); // %
+}
+    
+
+@function -getWidth($columnCount, $totalColumns, $margin) {
+    $columnWidth: (100% - (($margin * 2) * $totalColumns)) / $totalColumns;
+    @return ($columnCount * $columnWidth) + (($margin * 2) * ($columnCount - 1));
 }

@@ -12,11 +12,16 @@
  */
 
 .header-global {
-    background-color: #DDD;
+    background-color: green;
 
     > div {
         background-color: #EEE;
         height: 150px;
 
     }
+}
+
+.header-test {
+    background-color: blue;
+    height: 200px;
 }

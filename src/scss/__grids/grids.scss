@@ -19,17 +19,34 @@
  */
 
 
-@include create_grid_structure("structure", 1280px, 20px, 20px, 12, "tablet");
+@include create_grid_structure("structure", 1280px, 10px, 20px, 12, "tablet");
 
 .structure {
     background-color: blue;
+
+    // Manual Nested
+    // .col-1-2 {
+    // 	@include nested(200px, 4, 10px, 12px, "mobile");
+    // }
+
 }
 
 
-@include create_grid_structure("structure-inner", 1100px, 2px, 10px, 12, "smalldesktop");
+
+
+@include create_grid_structure("structure-inner", 1100px, 10px, 10px, 6, "tablet");
 
 .structure-inner {
     background-color: red;
+
+    .nested-grid {
+        @extend .cf;
+
+    	[class*='col-'] {
+    		height: 100px;
+    		background-color: #CCC;
+    	}
+    }
 }
 
 
