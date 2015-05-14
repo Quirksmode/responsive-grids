@@ -8,6 +8,8 @@
  * Note: Gutter and Margin labels are around the wrong way on the site.
  *
  *
+ * @param {string} $type
+ * @param {string} $clasName
  * @param {string} $total_Width
  * @param {string} $gutter_Width
  * @param {string} $margin_Width
@@ -15,20 +17,10 @@
  * @param {string} $breakpoint
  *
  * @example
- *     @include create_grid_structure("structure", 1320px, 60px, 24px, 12, "tablet");
+ *     @include create_grid_structure("type-structure", "structure", 1320px, 60px, 24px, 12, "tablet");
  */
 
 
-
- // [1,2,3,4]
-
-// create an array for column values 
-
-// duplicate grid file and rename to responise grid
-
-
-
-// @include create_grid_structure("structure", 1320px, 60px, 24px, 12);
 @include create_grid("type-responsive", "responsive", 1280px, 20px, 24px, 6);
 
 
@@ -45,9 +37,3 @@
 .responsive {
     margin-bottom: 60px;
 }
-
-
-
-
-
-
