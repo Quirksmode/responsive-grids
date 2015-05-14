@@ -159,6 +159,22 @@
 /* *********************************************************
  *
  *
+ * GRID 
+ *
+ *
+ * *********************************************************/
+
+/* *********************************************************
+ *
+ *
+ * MIXINS
+ *
+ *
+ * *********************************************************/
+
+/* *********************************************************
+ *
+ *
  * FUNCTIONS
  *
  *
@@ -703,20 +719,17 @@ th {
 /* line 18, ../../src/scss/__base/_helpers.scss */
 
 .cf,
-.structure:after,
-.structure-inner:after,
-.structure-inner .nested-grid {
+.responsive:after,
+.structure:after {
 	zoom: 1;
 }
 
 /* line 20, ../../src/scss/__base/_helpers.scss */
 
 .cf:before,
-.structure-inner .nested-grid:before,
 .cf:after,
-.structure:after,
-.structure-inner:after,
-.structure-inner .nested-grid:after {
+.responsive:after,
+.structure:after {
 	content: "";
 	display: table;
 }
@@ -724,9 +737,8 @@ th {
 /* line 21, ../../src/scss/__base/_helpers.scss */
 
 .cf:after,
-.structure:after,
-.structure-inner:after,
-.structure-inner .nested-grid:after {
+.responsive:after,
+.structure:after {
 	clear: both;
 }
 
@@ -1128,95 +1140,61 @@ img {
  *     @include create_grid_structure("structure", 1320px, 60px, 24px, 12, "tablet");
  */
 
-/* line 26, ../../src/scss/__mixins/_grid.scss */
+/* line 25, ../../src/scss/__mixins/_grid.scss */
+
+.responsive {
+	margin: 0 auto;
+	width: 96.875%;
+	max-width: 1240px;
+}
+
+/* line 30, ../../src/scss/__mixins/_grid.scss */
+
+.responsive.grid {
+	max-width: 1264px;
+	width: 98.81048%;
+}
+
+/* line 42, ../../src/scss/__mixins/_grid.scss */
+
+.responsive [class*='col-'] {
+	margin: 0 0.96774% 1.93548%;
+	width: 98.06452%;
+}
+
+/* line 25, ../../src/scss/__mixins/_grid.scss */
 
 .structure {
 	margin: 0 auto;
-	width: 98.4375%;
-	max-width: 1260px;
+	width: 96.875%;
+	max-width: 1240px;
 }
 
-/* line 31, ../../src/scss/__mixins/_grid.scss */
+/* line 30, ../../src/scss/__mixins/_grid.scss */
 
 .structure.grid {
-	max-width: 1280px;
-	width: 100.0248%;
+	max-width: 1264px;
+	width: 98.81048%;
 }
 
-/* line 44, ../../src/scss/__mixins/_grid.scss */
+/* line 42, ../../src/scss/__mixins/_grid.scss */
 
 .structure [class*='col-'] {
-	margin: 0 0.79365% 1.5873%;
-	width: 98.4127%;
-}
-
-/* line 49, ../../src/scss/__mixins/_grid.scss */
-
-.structure [class*='col-'] .nested-grid {
-	margin: 0 auto;
-	width: 98.4127%;
-}
-
-/* line 54, ../../src/scss/__mixins/_grid.scss */
-
-.structure [class*='col-'] .nested-grid [class*='col-'] {
-	margin: 0 0.79365% 1.5873%;
-	width: 98.4127%;
-}
-
-/* line 24, ../../src/scss/__grids/grids.scss */
-
-.structure {
-	background-color: blue;
-}
-
-/* line 26, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner {
-	margin: 0 auto;
-	width: 98.18182%;
-	max-width: 1080px;
-}
-
-/* line 31, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner.grid {
-	max-width: 1090px;
-	width: 99.10774%;
-}
-
-/* line 44, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner [class*='col-'] {
-	margin: 0 0.46296% 0.92593%;
-	width: 99.07407%;
-}
-
-/* line 49, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner [class*='col-'] .nested-grid {
-	margin: 0 auto;
-	width: 99.07407%;
-}
-
-/* line 54, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner [class*='col-'] .nested-grid [class*='col-'] {
-	margin: 0 0.46296% 0.92593%;
-	width: 99.07407%;
+	margin: 0 0.96774% 1.93548%;
+	width: 98.06452%;
 }
 
 /* line 39, ../../src/scss/__grids/grids.scss */
 
-.structure-inner {
-	background-color: red;
+.structure .col-1-6 {
+	height: 200px;
+	background-color: blue;
 }
 
 /* line 45, ../../src/scss/__grids/grids.scss */
 
-.structure-inner .nested-grid [class*='col-'] {
-	height: 100px;
-	background-color: #CCC;
+.responsive {
+	margin-bottom: 60px;
 }
 
 /**
@@ -1329,19 +1307,45 @@ h1 {
 	line-height: 4.8rem;
 }
 
-/* line 62, ../../src/scss/__mixins/_grid.scss */
+/* line 88, ../../src/scss/__mixins/_grid.scss */
+
+.responsive [class*='col-'] {
+	float: left;
+}
+
+/* line 93, ../../src/scss/__mixins/_grid.scss */
+
+.responsive.i-b {
+	font-size: 0;
+}
+
+/* line 96, ../../src/scss/__mixins/_grid.scss */
+
+.responsive.i-b [class*='col-'] {
+	float: none;
+	display: inline-block;
+	vertical-align: top;
+}
+
+/* line 142, ../../src/scss/__mixins/_grid.scss */
+
+.responsive .col-1-6 {
+	width: 48.06452%;
+}
+
+/* line 55, ../../src/scss/__mixins/_grid.scss */
 
 .structure [class*='col-'] {
 	float: left;
 }
 
-/* line 67, ../../src/scss/__mixins/_grid.scss */
+/* line 60, ../../src/scss/__mixins/_grid.scss */
 
 .structure.i-b {
 	font-size: 0;
 }
 
-/* line 70, ../../src/scss/__mixins/_grid.scss */
+/* line 63, ../../src/scss/__mixins/_grid.scss */
 
 .structure.i-b [class*='col-'] {
 	float: none;
@@ -1349,808 +1353,44 @@ h1 {
 	vertical-align: top;
 }
 
-/* line 104, ../../src/scss/__mixins/_grid.scss */
+/* line 134, ../../src/scss/__mixins/_grid.scss */
 
-.structure .col-1-12,
-.structure .col-1-12 {
-	width: 6.74603%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-1-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-1-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-1-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-1-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-1-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-1-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-2-12,
+.structure .col-1-6,
 .structure .col-1-6 {
-	width: 15.07937%;
+	width: 14.73118%;
 }
 
-/* line 125, ../../src/scss/__mixins/_grid.scss */
+/* line 134, ../../src/scss/__mixins/_grid.scss */
 
-.structure .col-2-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-2-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-2-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-2-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-2-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-2-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-3-12,
-.structure .col-1-4 {
-	width: 23.4127%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-3-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-3-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-3-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-3-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-3-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-3-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-4-12,
+.structure .col-2-6,
 .structure .col-1-3 {
-	width: 31.74603%;
+	width: 31.39785%;
 }
 
-/* line 125, ../../src/scss/__mixins/_grid.scss */
+/* line 134, ../../src/scss/__mixins/_grid.scss */
 
-.structure .col-4-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-4-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-4-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-4-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-4-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-4-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-5-12 {
-	width: 40.07937%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-5-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-5-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-5-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-5-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-5-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-5-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-6-12,
+.structure .col-3-6,
 .structure .col-1-2 {
-	width: 48.4127%;
+	width: 48.06452%;
 }
 
-/* line 125, ../../src/scss/__mixins/_grid.scss */
+/* line 134, ../../src/scss/__mixins/_grid.scss */
 
-.structure .col-6-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
+.structure .col-4-6 {
+	width: 64.73118%;
 }
 
-/* line 130, ../../src/scss/__mixins/_grid.scss */
+/* line 134, ../../src/scss/__mixins/_grid.scss */
 
-.structure .col-6-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
+.structure .col-5-6 {
+	width: 81.39785%;
 }
 
-/* line 138, ../../src/scss/__mixins/_grid.scss */
+/* line 134, ../../src/scss/__mixins/_grid.scss */
 
-.structure .col-6-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-6-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-6-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-6-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-7-12 {
-	width: 56.74603%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-7-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-7-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-7-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-7-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-7-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-7-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-8-12 {
-	width: 65.07937%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-8-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-8-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-8-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-8-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-8-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-8-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-9-12 {
-	width: 73.4127%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-9-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-9-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-9-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-9-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-9-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-9-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-10-12 {
-	width: 81.74603%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-10-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-10-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-10-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-10-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-10-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-10-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-11-12 {
-	width: 90.07937%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-11-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-11-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-11-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-11-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-11-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-11-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-12-12,
+.structure .col-6-6,
 .structure .col-1-1 {
-	width: 98.4127%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-12-12 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-12-12 .nested-grid [class*='col-'] {
-	margin: 0 0.07937% 0.15873%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-12-12 .nested-grid .col-1-4 {
-	width: 24.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-12-12 .nested-grid .col-2-4 {
-	width: 49.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-12-12 .nested-grid .col-3-4 {
-	width: 74.84127%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure .col-12-12 .nested-grid .col-4-4 {
-	width: 99.84127%;
-}
-
-/* line 62, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner [class*='col-'] {
-	float: left;
-}
-
-/* line 67, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner.i-b {
-	font-size: 0;
-}
-
-/* line 70, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner.i-b [class*='col-'] {
-	float: none;
-	display: inline-block;
-	vertical-align: top;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-1-6,
-.structure-inner .col-1-6 {
-	width: 15.74074%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-1-6 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-1-6 .nested-grid [class*='col-'] {
-	margin: 0 0.09259% 0.18519%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-1-6 .nested-grid .col-1-4 {
-	width: 24.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-1-6 .nested-grid .col-2-4 {
-	width: 49.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-1-6 .nested-grid .col-3-4 {
-	width: 74.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-1-6 .nested-grid .col-4-4 {
-	width: 99.81481%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-2-6,
-.structure-inner .col-1-3 {
-	width: 32.40741%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-2-6 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-2-6 .nested-grid [class*='col-'] {
-	margin: 0 0.09259% 0.18519%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-2-6 .nested-grid .col-1-4 {
-	width: 24.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-2-6 .nested-grid .col-2-4 {
-	width: 49.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-2-6 .nested-grid .col-3-4 {
-	width: 74.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-2-6 .nested-grid .col-4-4 {
-	width: 99.81481%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-3-6,
-.structure-inner .col-1-2 {
-	width: 49.07407%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-3-6 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-3-6 .nested-grid [class*='col-'] {
-	margin: 0 0.09259% 0.18519%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-3-6 .nested-grid .col-1-4 {
-	width: 24.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-3-6 .nested-grid .col-2-4 {
-	width: 49.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-3-6 .nested-grid .col-3-4 {
-	width: 74.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-3-6 .nested-grid .col-4-4 {
-	width: 99.81481%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-4-6 {
-	width: 65.74074%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-4-6 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-4-6 .nested-grid [class*='col-'] {
-	margin: 0 0.09259% 0.18519%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-4-6 .nested-grid .col-1-4 {
-	width: 24.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-4-6 .nested-grid .col-2-4 {
-	width: 49.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-4-6 .nested-grid .col-3-4 {
-	width: 74.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-4-6 .nested-grid .col-4-4 {
-	width: 99.81481%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-5-6 {
-	width: 82.40741%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-5-6 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-5-6 .nested-grid [class*='col-'] {
-	margin: 0 0.09259% 0.18519%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-5-6 .nested-grid .col-1-4 {
-	width: 24.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-5-6 .nested-grid .col-2-4 {
-	width: 49.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-5-6 .nested-grid .col-3-4 {
-	width: 74.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-5-6 .nested-grid .col-4-4 {
-	width: 99.81481%;
-}
-
-/* line 104, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-6-6,
-.structure-inner .col-1-1 {
-	width: 99.07407%;
-}
-
-/* line 125, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-6-6 .nested-grid {
-	margin: 0 auto;
-	width: 100%;
-}
-
-/* line 130, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-6-6 .nested-grid [class*='col-'] {
-	margin: 0 0.09259% 0.18519%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-6-6 .nested-grid .col-1-4 {
-	width: 24.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-6-6 .nested-grid .col-2-4 {
-	width: 49.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-6-6 .nested-grid .col-3-4 {
-	width: 74.81481%;
-}
-
-/* line 138, ../../src/scss/__mixins/_grid.scss */
-
-.structure-inner .col-6-6 .nested-grid .col-4-4 {
-	width: 99.81481%;
+	width: 98.06452%;
 }
 
 }
@@ -2164,6 +1404,12 @@ h1 {
 	line-height: 5.6rem;
 }
 
+/* line 142, ../../src/scss/__mixins/_grid.scss */
+
+.responsive .col-1-6 {
+	width: 31.39785%;
+}
+
 }
 
 @media all and (min-width: 64em) {
@@ -2173,6 +1419,22 @@ h1 {
 h1 {
 	font-size: 6.8rem;
 	line-height: 7.2rem;
+}
+
+/* line 142, ../../src/scss/__mixins/_grid.scss */
+
+.responsive .col-1-6 {
+	width: 23.06452%;
+}
+
+}
+
+@media all and (min-width: 80em) {
+
+/* line 142, ../../src/scss/__mixins/_grid.scss */
+
+.responsive .col-1-6 {
+	width: 14.73118%;
 }
 
 }

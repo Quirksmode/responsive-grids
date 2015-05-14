@@ -1,27 +1,26 @@
+/* *********************************************************
+ *
+ *
+ * GRID 
+ *
+ *
+ * *********************************************************/
 
-
-
-@mixin create_grid_structure(
+@mixin create_grid(
+    $type: 'type-structure',
     $className: 'structure',
     $width: 1280px,
     $gutter: 10px,
     $margin: 10px,
     $columns: 0,
-    $breakpoint: "tablet",
-    $nestedcolumns: 4,
-    $nestedGutter: 0px,
-    $nestedMargin: 2px
+    $breakpoint: "tablet"
 
     ) { // defualt values if parameters not specified
 
     $gutter: $gutter * 2; // px
-
     $structureWidth: $width - $gutter; // px
-
     $gutterWidth: -getGutterWidth($gutter, $width);
-
     $marginWidth: -getMarginWidth($margin, $structureWidth);
-
 
     .#{$className} {
         margin: 0 auto;
@@ -37,7 +36,6 @@
             @extend .cf;
         }
 
-
         @if $columns > 1 {
 
             // all col elements 100%
@@ -46,48 +44,80 @@
               width: -getWidth($columns, $columns, $marginWidth);
             }
 
-            [class*='col-'] .nested-grid {
-                margin: 0 auto;
-                width: -getWidth($columns, $columns, $marginWidth);
-            }
 
-            [class*='col-'] .nested-grid [class*='col-'] {
-                margin: 0 $marginWidth ($marginWidth*2);
-                width: -getWidth($columns, $columns, $marginWidth);
-            }
+            // ----------------------------------------------------
+            // TYPE STRUCTURE GRID
+            // ----------------------------------------------------
+            @if $type == "type-structure" {
 
-            @include mq($from: $breakpoint) {
-
-                // Let's float these cols
-                [class*='col-'] {
-                  float: left;
-                }
-
-                // Inline Block
-                &.i-b {
-                    font-size: 0;
-
+                @include mq($from: $breakpoint) {
+                    // Let's float these cols
                     [class*='col-'] {
-                        float: none;
-                        display: inline-block;
-                        vertical-align: top;
+                      float: left;
+                    }
+
+                    // Inline Block
+                    &.i-b {
+                        font-size: 0;
+
+                        [class*='col-'] {
+                            float: none;
+                            display: inline-block;
+                            vertical-align: top;
+                        }
+                    }
+                    @include calcColumns($columns, $marginWidth);
+                }
+            }
+
+            // ----------------------------------------------------
+            // TYPE RESPONSIVE GRID
+            // ----------------------------------------------------
+
+            @if $type == "type-responsive" {
+
+                @each $breakpoint in $mq-breakpoints {
+                    $breakpoint-name:  nth($breakpoint, 1);
+                    $breakpoint-width: nth($breakpoint, 2);
+                    $breakpoint-column: nth($breakpoint, 3);
+
+                    @include mq($from: $breakpoint-name) {
+
+                        @if $breakpoint-name == "tablet" {
+                            // Let's float these cols
+                            [class*='col-'] {
+                              float: left;
+                            }
+
+                            // Inline Block
+                            &.i-b {
+                                font-size: 0;
+
+                                [class*='col-'] {
+                                    float: none;
+                                    display: inline-block;
+                                    vertical-align: top;
+                                }
+                            }
+                        }
+                        @include calcResponsiveColumns($columns, $marginWidth, $breakpoint-column);
                     }
                 }
-
-                @include calcColumns(
-                    $columns, 
-                    $marginWidth, 
-                    $nestedcolumns, 
-                    -getGutterWidth($nestedGutter, $width), 
-                    -getMarginWidth($nestedMargin, $structureWidth)
-                );
             }
         }
     }
 }
 
+/* *********************************************************
+ *
+ *
+ * MIXINS
+ *
+ *
+ * *********************************************************/
 
-@mixin calcColumns($numberOfColumns, $margin, $nestedcolumns, $gutterWidth, $marginWidth) {
+
+@mixin calcColumns($numberOfColumns, $margin) {
 
     @for $i from 1 through $numberOfColumns {
 
@@ -105,40 +135,13 @@
             width: -getWidth($i, $numberOfColumns, $margin);
 
         }
-
-        @if $nestedcolumns > 1 {
-        @include nestedColumns(
-                $i, 
-                $numberOfColumns, 
-                $nestedcolumns, 
-                $gutterWidth, 
-                $marginWidth
-            );
-        }
     }
 }
 
-
-@mixin nestedColumns($index, $numberOfColumns, $nestedcolumns, $gutterWidth, $marginWidth) {
-    
-
-    .col-#{$index}-#{$numberOfColumns} .nested-grid {
-        margin: 0 auto;
-        width: 100% - $gutterWidth;
+@mixin calcResponsiveColumns($numberOfColumns, $margin, $col) {
+    .col-1-#{$numberOfColumns} {
+        width: -getWidth(1, $col, $margin);
     }
-
-    .col-#{$index}-#{$numberOfColumns} .nested-grid [class*='col-'] {
-        margin: 0 $marginWidth ($marginWidth*2);
-        //width: -getWidth($nestedcolumns, $nestedcolumns, $marginWidth);
-    }
-
-
-    @for $i from 1 through $nestedcolumns {
-
-        .col-#{$index}-#{$numberOfColumns} .nested-grid .col-#{$i}-4 {
-            width: -getWidth($i, $nestedcolumns, $marginWidth);
-        }
-    }   
 }
 
 

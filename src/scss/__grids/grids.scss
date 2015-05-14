@@ -19,34 +19,31 @@
  */
 
 
-@include create_grid_structure("structure", 1280px, 10px, 20px, 12, "tablet");
+
+ // [1,2,3,4]
+
+// create an array for column values 
+
+// duplicate grid file and rename to responise grid
+
+
+
+// @include create_grid_structure("structure", 1320px, 60px, 24px, 12);
+@include create_grid("type-responsive", "responsive", 1280px, 20px, 24px, 6);
+
+
+@include create_grid("type-structure", "structure", 1280px, 20px, 24px, 6);
 
 .structure {
-    background-color: blue;
-
-    // Manual Nested
-    // .col-1-2 {
-    // 	@include nested(200px, 4, 10px, 12px, "mobile");
-    // }
-
+    
+    .col-1-6 {
+        height: 200px;
+        background-color: blue;
+    }
 }
 
-
-
-
-@include create_grid_structure("structure-inner", 1100px, 10px, 10px, 6, "tablet");
-
-.structure-inner {
-    background-color: red;
-
-    .nested-grid {
-        @extend .cf;
-
-    	[class*='col-'] {
-    		height: 100px;
-    		background-color: #CCC;
-    	}
-    }
+.responsive {
+    margin-bottom: 60px;
 }
 
 
