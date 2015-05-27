@@ -20,14 +20,20 @@
  *     @include create_grid_structure("type-structure", "structure", 1320px, 60px, 24px, 12, "tablet");
  */
 
+ $bp-grid: (
+    (tablet         2)
+    (smalldesktop   3)
+    (desktop        4)
+    (largedesktop   6)
+);
 
-@include create_grid("type-responsive", "responsive", 1280px, 20px, 24px, 6);
+@include create_grid("responsive", 1280px, 20px, 24px, 6, $bp-grid);
 
 
-@include create_grid("type-structure", "structure", 1280px, 20px, 24px, 6);
+@include create_grid("structure", 1280px);
 
 .structure {
-    
+
     .col-1-6 {
         height: 200px;
         background-color: blue;

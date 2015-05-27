@@ -7,11 +7,10 @@
  * *********************************************************/
 
 @mixin create_grid(
-    $type: 'type-structure',
     $className: 'structure',
     $width: 1280px,
-    $gutter: 10px,
-    $margin: 10px,
+    $gutter: 0px,
+    $margin: 0px,
     $columns: 0,
     $breakpoint: "tablet"
 
@@ -36,6 +35,7 @@
             @extend .cf;
         }
 
+
         @if $columns > 1 {
 
             // all col elements 100%
@@ -44,11 +44,11 @@
               width: -getWidth($columns, $columns, $marginWidth);
             }
 
-
             // ----------------------------------------------------
             // TYPE STRUCTURE GRID
             // ----------------------------------------------------
-            @if $type == "type-structure" {
+
+            @if type-of($breakpoint) == 'string' {
 
                 @include mq($from: $breakpoint) {
                     // Let's float these cols
@@ -74,12 +74,12 @@
             // TYPE RESPONSIVE GRID
             // ----------------------------------------------------
 
-            @if $type == "type-responsive" {
+            @if type-of($breakpoint) == 'list' {
 
-                @each $breakpoint in $mq-breakpoints {
-                    $breakpoint-name:  nth($breakpoint, 1);
-                    $breakpoint-width: nth($breakpoint, 2);
-                    $breakpoint-column: nth($breakpoint, 3);
+                @each $bp in $breakpoint {
+                    $breakpoint-name:  nth($bp, 1);
+                    $breakpoint-column: nth($bp, 2);
+
 
                     @include mq($from: $breakpoint-name) {
 
