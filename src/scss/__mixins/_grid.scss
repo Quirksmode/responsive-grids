@@ -7,21 +7,28 @@
  * *********************************************************/
 
 @mixin create_grid(
-    $className: 'structure',
+    $parent: 'structure',
     $width: 1280px,
     $gutter: 0px,
     $margin: 0px,
-    $columns: 0,
+    $value: 0, // dynamic value - number or string
     $breakpoint: "tablet"
-
     ) { // defualt values if parameters not specified
+
+
+    @if type-of($value) == 'number' { 
+        $columns: $value;
+    } @else { // value is string
+        $className: $value;
+        $columns: 2; // needs a defualt value
+    }
 
     $gutter: $gutter * 2; // px
     $structureWidth: $width - $gutter; // px
     $gutterWidth: -getGutterWidth($gutter, $width);
     $marginWidth: -getMarginWidth($margin, $structureWidth);
 
-    .#{$className} {
+    .#{$parent} {
         margin: 0 auto;
         width: 100% - $gutterWidth;
         max-width: $structureWidth;
@@ -38,17 +45,17 @@
 
         @if $columns > 1 {
 
-            // all col elements 100%
-            [class*='col-'] {
-              margin: 0 $marginWidth ($marginWidth*2);
-              width: -getWidth($columns, $columns, $marginWidth);
-            }
-
             // ----------------------------------------------------
             // TYPE STRUCTURE GRID
             // ----------------------------------------------------
 
             @if type-of($breakpoint) == 'string' {
+
+                // all col elements 100%
+                [class*='col-'] {
+                  margin: 0 $marginWidth ($marginWidth*2);
+                  width: -getWidth($columns, $columns, $marginWidth);
+                }
 
                 @include mq($from: $breakpoint) {
                     // Let's float these cols
@@ -71,10 +78,15 @@
             }
 
             // ----------------------------------------------------
-            // TYPE RESPONSIVE GRID
+            // TYPE ADAPTIVE GRID
             // ----------------------------------------------------
 
             @if type-of($breakpoint) == 'list' {
+
+                .#{$className} {
+                  margin: 0 $marginWidth ($marginWidth*2);
+                  width: -getWidth($columns, $columns, $marginWidth);
+                }
 
                 @each $bp in $breakpoint {
                     $breakpoint-name:  nth($bp, 1);
@@ -85,7 +97,7 @@
 
                         @if $breakpoint-name == "tablet" {
                             // Let's float these cols
-                            [class*='col-'] {
+                            .#{$className}  {
                               float: left;
                             }
 
@@ -93,14 +105,14 @@
                             &.i-b {
                                 font-size: 0;
 
-                                [class*='col-'] {
+                                .#{$className}  {
                                     float: none;
                                     display: inline-block;
                                     vertical-align: top;
                                 }
                             }
                         }
-                        @include calcResponsiveColumns($columns, $marginWidth, $breakpoint-column);
+                        @include calcResponsiveColumns($className, $marginWidth, $breakpoint-column);
                     }
                 }
             }
@@ -138,8 +150,8 @@
     }
 }
 
-@mixin calcResponsiveColumns($numberOfColumns, $margin, $col) {
-    .col-1-#{$numberOfColumns} {
+@mixin calcResponsiveColumns($className, $margin, $col) {
+    .#{$className} {
         width: -getWidth(1, $col, $margin);
     }
 }

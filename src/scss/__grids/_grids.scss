@@ -27,10 +27,9 @@
     (largedesktop   6)
 );
 
-@include create_grid("responsive", 1280px, 20px, 24px, 6, $bp-grid);
+@include create_grid("responsive", 1280px, 20px, 24px, "fluid", $bp-grid);
 
-
-@include create_grid("structure", 1280px);
+@include create_grid("structure", 1280px, 20px, 24px, 6, "smalldesktop");
 
 .structure {
 
