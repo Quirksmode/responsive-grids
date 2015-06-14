@@ -1,41 +1,35 @@
 /* *********************************************************
  *
  *
- * GRID 
+ * GRID
  *
  *
  * *********************************************************/
 
-@mixin create_grid(
-    $parent: 'structure',
+@mixin rg-create-grid(
+    $grid-class: 'structure',
     $width: 1280px,
-    $gutter: 0px,
-    $margin: 0px,
-    $value: 0, // dynamic value - number or string
+    $gutter: 20px,
+    $margin: 24px,
+    $columns: 12,
+    $column-class: 0, // dynamic value - number or string
     $breakpoint: "tablet"
-    ) { // defualt values if parameters not specified
+    ) { // default values if parameters not specified
 
-
-    @if type-of($value) == 'number' { 
-        $columns: $value;
-    } @else { // value is string
-        $className: $value;
-        $columns: 2; // needs a defualt value
-    }
 
     $gutter: $gutter * 2; // px
     $structureWidth: $width - $gutter; // px
-    $gutterWidth: -getGutterWidth($gutter, $width);
-    $marginWidth: -getMarginWidth($margin, $structureWidth);
+    $gutterWidth: rg-getGutterWidth($gutter, $width);
+    $marginWidth: rg-getMarginWidth($margin, $structureWidth);
 
-    .#{$parent} {
+    .#{$grid-class} {
         margin: 0 auto;
-        width: 100% - $gutterWidth;
-        max-width: $structureWidth;
+        max-width: $structureWidth + $margin;
+        width: (100% - $gutterWidth) + ($marginWidth * 2);
 
-        &.grid {
-            max-width: $structureWidth + $margin;
-            width: (100% - $gutterWidth) + ($marginWidth * 2);
+        &.no-cols {
+            max-width: $structureWidth;
+            width: 100% - $gutterWidth;
         }
 
         &:after {
@@ -54,13 +48,25 @@
                 // all col elements 100%
                 [class*='col-'] {
                   margin: 0 $marginWidth ($marginWidth*2);
-                  width: -getWidth($columns, $columns, $marginWidth);
+                  width: rg-getWidth($columns, $columns, $marginWidth);
                 }
 
                 @include mq($from: $breakpoint) {
                     // Let's float these cols
                     [class*='col-'] {
                       float: left;
+                    }
+
+                    // Float Right
+                    .a-r {
+                        float: right;
+                    }
+
+                    // Align Center
+                    .a-c {
+                        float: none;
+                        margin-left: auto;
+                        margin-right: auto;
                     }
 
                     // Inline Block
@@ -73,7 +79,7 @@
                             vertical-align: top;
                         }
                     }
-                    @include calcColumns($columns, $marginWidth);
+                    @include rg-calcColumns($columns, $marginWidth);
                 }
             }
 
@@ -83,9 +89,9 @@
 
             @if type-of($breakpoint) == 'list' {
 
-                .#{$className} {
+                .#{$column-class} {
                   margin: 0 $marginWidth ($marginWidth*2);
-                  width: -getWidth($columns, $columns, $marginWidth);
+                  width: rg-getWidth($columns, $columns, $marginWidth);
                 }
 
                 @each $bp in $breakpoint {
@@ -95,24 +101,37 @@
 
                     @include mq($from: $breakpoint-name) {
 
+                        // Should this be more dynamic e.g. 1st array item?
                         @if $breakpoint-name == "tablet" {
                             // Let's float these cols
-                            .#{$className}  {
+                            .#{$column-class}  {
                               float: left;
+                            }
+
+                            // Float Right
+                            .a-r {
+                                float: right;
+                            }
+
+                            // Align Center
+                            .a-c {
+                                float: none;
+                                margin-left: auto;
+                                margin-right: auto;
                             }
 
                             // Inline Block
                             &.i-b {
                                 font-size: 0;
 
-                                .#{$className}  {
+                                .#{$column-class}  {
                                     float: none;
                                     display: inline-block;
                                     vertical-align: top;
                                 }
                             }
                         }
-                        @include calcResponsiveColumns($className, $marginWidth, $breakpoint-column);
+                        @include rg-calcResponsiveColumns($column-class, $marginWidth, $breakpoint-column);
                     }
                 }
             }
@@ -129,11 +148,11 @@
  * *********************************************************/
 
 
-@mixin calcColumns($numberOfColumns, $margin) {
+@mixin rg-calcColumns($numberOfColumns, $margin) {
 
     @for $i from 1 through $numberOfColumns {
 
-        // divide the number of columns into the increment number and look for a whole number 
+        // divide the number of columns into the increment number and look for a whole number
         $num: $numberOfColumns / $i;
         $num2: round($numberOfColumns / $i);
 
@@ -144,15 +163,15 @@
         }
 
         .col-#{$i}-#{$numberOfColumns}, #{$string} {
-            width: -getWidth($i, $numberOfColumns, $margin);
+            width: rg-getWidth($i, $numberOfColumns, $margin);
 
         }
     }
 }
 
-@mixin calcResponsiveColumns($className, $margin, $col) {
-    .#{$className} {
-        width: -getWidth(1, $col, $margin);
+@mixin rg-calcResponsiveColumns($column-class, $margin, $col) {
+    .#{$column-class} {
+        width: rg-getWidth(1, $col, $margin);
     }
 }
 
@@ -165,16 +184,16 @@
  *
  * *********************************************************/
 
-@function -getGutterWidth($gutter, $width) {
+@function rg-getGutterWidth($gutter, $width) {
     @return ($gutter / $width) * 100%; // %
 }
 
-@function -getMarginWidth($margin, $width) {
+@function rg-getMarginWidth($margin, $width) {
     @return ((($margin / 2) / $width) * 100%); // %
 }
-    
 
-@function -getWidth($columnCount, $totalColumns, $margin) {
+
+@function rg-getWidth($columnCount, $totalColumns, $margin) {
     $columnWidth: (100% - (($margin * 2) * $totalColumns)) / $totalColumns;
     @return ($columnCount * $columnWidth) + (($margin * 2) * ($columnCount - 1));
 }

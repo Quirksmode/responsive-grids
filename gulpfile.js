@@ -1,96 +1,63 @@
 /************************
 Gulp - Installation Instructions
 
-To install Gulp globally:
+Install Gulp globally:
 $ npm install gulp -g
 
-To install dependencies automatically (Requires up to data package.json):
-$ npm install gulp --save-dev
-
-To install dependencies manually (Ensure this list matches the plugins list below):
-$ npm install gulp-compass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-uglify gulp-imagemin gulp-concat gulp-notify gulp-cache gulp-livereload gulp-util tiny-lr gulp-combine-media-queries gulp-requirejs --save-dev
-***********************/
+Install NPM Packages
+$ npm install
+************************/
 
 var src = "src/",
-    dev = "dev/",
-    dist = "static/";
-
+    dest = "dest/";
 
 // Load plugins
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    del = require('del'),
-
-    // css specific
-    minifyCSS = require('gulp-minify-css'),
-    watch = require('gulp-watch'),
-    autoprefixer = require('gulp-autoprefixer'),
-    cmq = require('gulp-combine-media-queries');
-
-    // javascript specific
-
-    // jshint = require('gulp-jshint'),
-    // uglify = require('gulp-uglify'),
-    // imagemin = require('gulp-imagemin'),
-    // concat = require('gulp-concat'),
-    // gutil = require('gulp-util'),
-    // 
-    
-    // requirejs = require('requirejs'),
-    // livereload = require('gulp-livereload'),
-    // run = require('gulp-run');
-
-
-// Default task
-gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'copy-index');
-});
-
-
-gulp.task('watch', function () {
-    gulp.watch(src + 'scss/**/*.scss', ['styles']),
-    gulp.watch(src + '*', ['copy-index']);
-});
-
-
+var gulp            = require('gulp');
+var sass            = require('gulp-sass');
+var watch           = require('gulp-watch');
+var browserSync     = require('browser-sync');
+var autoprefixer    = require('gulp-autoprefixer');
+var cmq             = require('gulp-combine-media-queries');
+var gnotify         = require('gulp-notify');
+var uglify          = require('gulp-uglify');
 
 gulp.task('styles', function () {
   gulp.src(src + 'scss/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest(dist + 'css'));
+    .pipe(sass({
+      outputStyle: 'nested'
+    }))
+    .on('error', function() {
+        gnotify.onError().apply(this, arguments);
+        this.emit('end');
+    })
+    .pipe(autoprefixer("last 2 versions", "ie 8"))
+    .pipe(cmq({ log: true }))
+    .pipe(gulp.dest(dest + 'css'))
+    .pipe(browserSync.reload({stream:true}));
 });
 
-
-
-
-// Styles
-// gulp.task('styles', function () {
-
-//     return gulp.src(src + 'scss/**/*.scss')
-
-//         .pipe(sass().on('error', sass.logError))
-
-//         .pipe(autoprefixer({
-//             browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12', 'ios 6', 'android 4'],
-//             cascade: false
-//         }))
-
-//         .pipe(cmq({ log: true })) // Combine the media queries
-
-//         //.pipe(minifyCSS({keepBreaks:false}))
-
-//         .pipe(gulp.dest(dist + 'css'));
-// });
-
-
-// Copy file to static 
-gulp.task('copy-index', function () {
-    return gulp.src(src + 'index.html')
-        .pipe(gulp.dest(dist));
+gulp.task('scripts', function() {
+  return gulp.src(src + 'js/**/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest(dest + 'js'))
+    .pipe(browserSync.reload({stream:true}));
 });
 
-// Clean - Deletes all the files before recompiling to ensure no unused files remain
-gulp.task('clean', function(cb) {
-    del(["../static/**"],{force: true}, cb);
+// Define the watch task
+gulp.task('watch', ['browserSync'], function() {
+  gulp.watch(src + 'scss/**/*.scss',  ['styles']);
+  gulp.watch(src + 'js/**/*.scss',  ['scripts']);
 });
 
+gulp.task('browserSync', function() {
+  browserSync({
+    server: {
+            baseDir: './'
+        }
+    });
+});
+
+// Default task
+gulp.task('default', function() {
+    gulp.start('styles', 'scripts', 'watch');
+});

@@ -1,0 +1,31 @@
+/**
+ *
+ * This is the IE Specific core/primary stylesheet for the whole site, all other stylesheets are pulled in by this one.
+ * It compiles to assets/css/ie.css, only IE8 and below will see this file
+ * Because IE8 and below does not support media queries we have removed these and also added extra specific IE styles below.
+ *
+ * ## Usage
+ * Add to your base html file in a ie sepecific condition
+ *
+ *     <!--[if lte IE 8]>
+ *         <link rel='stylesheet' href='/path/to/file/ie.css') }}' />
+ *     <![endif]-->
+ *
+ */
+
+// To enable support for browsers that do not support @media queries,
+// (IE <= 8, Firefox <= 3, Opera <= 9) set $mq-responsive to false
+// Create a separate stylesheet served exclusively to these browsers,
+// meaning @media queries will be rasterized, relying on the cascade itself
+$mq-responsive: true;
+
+// Define the breakpoint from the $mq-breakpoints list that should
+// be used as the target width when outputting a static stylesheet
+// (i.e. when $mq-responsive is set to 'false').
+$mq-static-breakpoint: desktop;
+
+// Define IE mode to be true, this triggers certain mixins to output styles differently
+$lteIE8: true;
+
+// Load the imports file which contains the imports to all the SASS files
+@import "__imports/imports";
