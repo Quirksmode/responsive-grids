@@ -9,14 +9,14 @@
 // A set of breakpoints that includes larger screens than we would
 // normally target with static styles for older browsers.
 $mq-breakpoints: (
-    (tablet      	481px)
-    (smalldesktop   769px)
-    (desktop 		1024px)
-    (largedesktop   1280px)
+    (tablet      	481px     2)
+    (smalldesktop   769px     3)
+    (desktop 		1024px    4)
+    (largedesktop   1280px    6)
 );
 
 // Import Compass Helpers
-@import "compass";
+//@import "compass";
 
 // Import Media Query Mixin
 @import "__mixins/mq";

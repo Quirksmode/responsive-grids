@@ -1,36 +1,42 @@
+/* *********************************************************
+ *
+ *
+ * GRID 
+ *
+ *
+ * *********************************************************/
 
-@mixin create_grid_structure(
-    $className: 'structure',
-    $totalWidth: 1280px,
-    $gutterWidth: 10px,
-    $marginWidth: 10px,
-    $columns: 0,
+@mixin create_grid(
+    $parent: 'structure',
+    $width: 1280px,
+    $gutter: 0px,
+    $margin: 0px,
+    $value: 0, // dynamic value - number or string
     $breakpoint: "tablet"
     ) { // defualt values if parameters not specified
 
-    $gutterWidth: $gutterWidth * 2; // px
-    $contentWidth: $totalWidth - $gutterWidth; // px
-    $structureWidth: $contentWidth + $gutterWidth; // px
-    $gridWidth: $contentWidth + $marginWidth; // px
-    $margin: ((($marginWidth / 2) / $gridWidth) * 100%); // %
-    $structureGutter: ($gutterWidth / $structureWidth) * 100%; // %
 
-    
-    // if gutter width is less than margin width by half then
-    // margin width is not required in the calculation
-
-    $num: $gutterWidth - $marginWidth;
-
-    @if $num < 0 {
-        $num: $gutterWidth;
+    @if type-of($value) == 'number' { 
+        $columns: $value;
+    } @else { // value is string
+        $className: $value;
+        $columns: 2; // needs a defualt value
     }
- 
-    $gridGutter: ($num / $structureWidth) * 100%; // %
 
-    .#{$className} {
+    $gutter: $gutter * 2; // px
+    $structureWidth: $width - $gutter; // px
+    $gutterWidth: -getGutterWidth($gutter, $width);
+    $marginWidth: -getMarginWidth($margin, $structureWidth);
+
+    .#{$parent} {
         margin: 0 auto;
-        width: 100% - $structureGutter;
-        max-width: $contentWidth;
+        width: 100% - $gutterWidth;
+        max-width: $structureWidth;
+
+        &.grid {
+            max-width: $structureWidth + $margin;
+            width: (100% - $gutterWidth) + ($marginWidth * 2);
+        }
 
         &:after {
             @extend .cf;
@@ -39,47 +45,88 @@
 
         @if $columns > 1 {
 
-            &.grid {
-                width: 100% - $gridGutter;
-                max-width: $gridWidth;
-            }
+            // ----------------------------------------------------
+            // TYPE STRUCTURE GRID
+            // ----------------------------------------------------
 
-            // Mobile - all col elements 100%
-            [class*='col-'] {
-              margin: 0 $margin ($margin*2);
-              @include calcWidth(12, 12, $margin);
-            }
+            @if type-of($breakpoint) == 'string' {
 
-
-            @include mq($from: $breakpoint) {
-
-                // Let's float these cols
+                // all col elements 100%
                 [class*='col-'] {
-                  float: left;
+                  margin: 0 $marginWidth ($marginWidth*2);
+                  width: -getWidth($columns, $columns, $marginWidth);
                 }
 
-                // Inline Block
-                &.i-b {
-                    font-size: 0;
-
+                @include mq($from: $breakpoint) {
+                    // Let's float these cols
                     [class*='col-'] {
-                        float: none;
-                        display: inline-block;
-                        vertical-align: top;
+                      float: left;
+                    }
+
+                    // Inline Block
+                    &.i-b {
+                        font-size: 0;
+
+                        [class*='col-'] {
+                            float: none;
+                            display: inline-block;
+                            vertical-align: top;
+                        }
+                    }
+                    @include calcColumns($columns, $marginWidth);
+                }
+            }
+
+            // ----------------------------------------------------
+            // TYPE ADAPTIVE GRID
+            // ----------------------------------------------------
+
+            @if type-of($breakpoint) == 'list' {
+
+                .#{$className} {
+                  margin: 0 $marginWidth ($marginWidth*2);
+                  width: -getWidth($columns, $columns, $marginWidth);
+                }
+
+                @each $bp in $breakpoint {
+                    $breakpoint-name:  nth($bp, 1);
+                    $breakpoint-column: nth($bp, 2);
+
+
+                    @include mq($from: $breakpoint-name) {
+
+                        @if $breakpoint-name == "tablet" {
+                            // Let's float these cols
+                            .#{$className}  {
+                              float: left;
+                            }
+
+                            // Inline Block
+                            &.i-b {
+                                font-size: 0;
+
+                                .#{$className}  {
+                                    float: none;
+                                    display: inline-block;
+                                    vertical-align: top;
+                                }
+                            }
+                        }
+                        @include calcResponsiveColumns($className, $marginWidth, $breakpoint-column);
                     }
                 }
-
-                @include calcColumns($columns, $margin);
             }
         }
     }
 }
 
-
-@mixin calcWidth($columnCount, $totalColumns, $margin) {
-    $columnWidth: (100% - (($margin * 2) * $totalColumns)) / $totalColumns;
-    width: ($columnCount * $columnWidth) + (($margin * 2) * ($columnCount - 1));
-}
+/* *********************************************************
+ *
+ *
+ * MIXINS
+ *
+ *
+ * *********************************************************/
 
 
 @mixin calcColumns($numberOfColumns, $margin) {
@@ -97,8 +144,37 @@
         }
 
         .col-#{$i}-#{$numberOfColumns}, #{$string} {
-            $columnWidth: (100% - (($margin * 2) * $numberOfColumns)) / $numberOfColumns;
-            width: ($i * $columnWidth) + (($margin * 2) * ($i - 1));
+            width: -getWidth($i, $numberOfColumns, $margin);
+
         }
     }
+}
+
+@mixin calcResponsiveColumns($className, $margin, $col) {
+    .#{$className} {
+        width: -getWidth(1, $col, $margin);
+    }
+}
+
+
+/* *********************************************************
+ *
+ *
+ * FUNCTIONS
+ *
+ *
+ * *********************************************************/
+
+@function -getGutterWidth($gutter, $width) {
+    @return ($gutter / $width) * 100%; // %
+}
+
+@function -getMarginWidth($margin, $width) {
+    @return ((($margin / 2) / $width) * 100%); // %
+}
+    
+
+@function -getWidth($columnCount, $totalColumns, $margin) {
+    $columnWidth: (100% - (($margin * 2) * $totalColumns)) / $totalColumns;
+    @return ($columnCount * $columnWidth) + (($margin * 2) * ($columnCount - 1));
 }

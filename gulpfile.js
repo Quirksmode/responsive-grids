@@ -18,7 +18,7 @@ var src = "src/",
 
 // Load plugins
 var gulp = require('gulp'),
-    compass = require('gulp-compass'),
+    sass = require('gulp-sass'),
     del = require('del'),
 
     // css specific
@@ -53,27 +53,34 @@ gulp.task('watch', function () {
 });
 
 
-// Styles
+
 gulp.task('styles', function () {
-
-    return gulp.src(src + 'scss/*.scss')
-
-        .pipe(compass({
-            css: dist + 'css',
-            sass: src + 'scss'
-        }))
-
-        .pipe(autoprefixer({
-            browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12', 'ios 6', 'android 4'],
-            cascade: false
-        }))
-
-        .pipe(cmq({ log: true })) // Combine the media queries
-
-        //.pipe(minifyCSS({keepBreaks:false}))
-
-        .pipe(gulp.dest(dist + 'css'));
+  gulp.src(src + 'scss/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(dist + 'css'));
 });
+
+
+
+
+// Styles
+// gulp.task('styles', function () {
+
+//     return gulp.src(src + 'scss/**/*.scss')
+
+//         .pipe(sass().on('error', sass.logError))
+
+//         .pipe(autoprefixer({
+//             browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12', 'ios 6', 'android 4'],
+//             cascade: false
+//         }))
+
+//         .pipe(cmq({ log: true })) // Combine the media queries
+
+//         //.pipe(minifyCSS({keepBreaks:false}))
+
+//         .pipe(gulp.dest(dist + 'css'));
+// });
 
 
 // Copy file to static 

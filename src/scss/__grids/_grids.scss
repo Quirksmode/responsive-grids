@@ -1,0 +1,44 @@
+/*------------------------------------*
+    VARIABLES
+/*------------------------------------*
+ *
+ * Edit these variables to define your grids. You can define your columns below
+ * Please ensure the pixels round up correctly.
+ * To calculate your grids Use http://gridcalculator.dk/
+ * Note: Gutter and Margin labels are around the wrong way on the site.
+ *
+ *
+ * @param {string} $type
+ * @param {string} $clasName
+ * @param {string} $total_Width
+ * @param {string} $gutter_Width
+ * @param {string} $margin_Width
+ * @param {string} $col
+ * @param {string} $breakpoint
+ *
+ * @example
+ *     @include create_grid_structure("type-structure", "structure", 1320px, 60px, 24px, 12, "tablet");
+ */
+
+ $bp-grid: (
+    (tablet         2)
+    (smalldesktop   3)
+    (desktop        4)
+    (largedesktop   6)
+);
+
+@include create_grid("responsive", 1280px, 20px, 24px, "fluid", $bp-grid);
+
+@include create_grid("structure", 1280px, 20px, 24px, 6, "smalldesktop");
+
+.structure {
+
+    .col-1-6 {
+        height: 200px;
+        background-color: blue;
+    }
+}
+
+.responsive {
+    margin-bottom: 60px;
+}
