@@ -1,0 +1,78 @@
+/*------------------------------------*
+    DEFINE BREAKPOINTS
+/*------------------------------------*
+ *
+ * We are using the sass-mq mixin to allow us to define our breakpoints
+ * https://github.com/sass-mq/sass-mq
+ *
+ */
+
+$mq-breakpoints: (
+    mobile:         320px,
+    tablet:         481px,
+    smalldesktop:   768px,
+    desktop:        1024px,
+    largedesktop:   1280px
+);
+
+
+/*------------------------------------*
+    RESPONSIVE VARIABLES
+/*------------------------------------*
+ *
+ * Edit these variables to define your grids. You can define your columns below
+ * Please ensure the pixels round up correctly.
+ * To calculate your grids we recommend you use http://gridcalculator.dk/
+ * Note: Gutter and Margin labels are around the wrong way on the site.
+ *
+ *
+ * @example
+ *      @include rg-create-grid(
+ *           $grid-class: "grid-fullwidth",
+ *           $width: 1280px,
+ *           $gutter: 20px,
+ *           $margin: 24px,
+ *           $columns: 12,
+ *           $breakpoint: "tablet"
+ *       );
+ *
+ */
+
+@include rg-create-grid(
+    $grid-class: "grid-fullwidth",
+    $width: 1280px,
+    $gutter: 20px,
+    $margin: 24px,
+    $columns: 12,
+    $breakpoint: "tablet"
+);
+
+@include rg-create-grid(
+    $grid-class:    "grid-custom",
+    $width:         1280px,
+    $gutter:        20px,
+    $margin:        24px,
+    $column-class:  "grid-custom__col",
+    $breakpoint:    ((tablet         2)
+                    (smalldesktop    3)
+                    (desktop         4)
+                    (largedesktop    6))
+);
+
+@include rg-create-grid(
+    $grid-class: "grid-nogaps",
+    $width: 1280px,
+    $gutter: 0px,
+    $margin: 0px,
+    $columns: 4,
+    $breakpoint: "tablet"
+);
+
+@include rg-create-grid(
+    $grid-class: "grid-smaller",
+    $width: 1000px,
+    $gutter: 30px,
+    $margin: 12px,
+    $columns: 8,
+    $breakpoint: "smalldesktop"
+);

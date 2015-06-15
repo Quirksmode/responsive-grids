@@ -1,46 +1,16 @@
 /**
- * @group css.styles
  *
  * This is the core/primary stylesheet for the whole site, all other stylesheets are pulled in by this one.
  * It is mobile first so we declare all our base styles first add more through media queries
  *
+ * ## Usage
+ * Add to your base html file in a conditional statement to not load it if you are using IE8 or less
+ *
+ *     <!--[if !lte IE 8]>
+ *         <link rel='stylesheet' href='/path/to/file/virgin.css') }}' />
+ *     <![endif]-->
+ *
  */
 
-// A set of breakpoints that includes larger screens than we would
-// normally target with static styles for older browsers.
-$mq-breakpoints: (
-    (tablet      	481px)
-    (smalldesktop   769px)
-    (desktop 		1024px)
-    (largedesktop   1280px)
-);
-
-// Import Compass Helpers
-@import "compass";
-
-// Import Media Query Mixin
-@import "__mixins/mq";
-@import "__mixins/mixins";
-@import "__mixins/animations";
-@import "__mixins/grid";
-
-// Import Base Styles
-@import "__base/normalize";
-@import "__base/helpers";
-@import "__base/colours";
-@import "__base/fonts";
-@import "__base/base";
-@import "__base/forms";
-
-
-@import "__grids/grids";
-
-@import "__animations/global";
-
-@import "__components/__headers/header-global";
-@import "__components/__footers/footer-global";
-
-@import "__pages/page";
-
-@import "__pages/__includes/strip";
-
+// Load the imports file which contains the imports to all the SASS files
+@import "__imports/imports";

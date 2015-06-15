@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js ie"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Responsive Grids</title>
+        <!--[if (gt IE 8) | (IEMobile)]><!-->
+            <link href="dest/css/styles.css" rel="stylesheet" type="text/css" />
+        <!--<![endif]-->
+        <!--[if (lt IE 9) & (!IEMobile)]>
+            <link rel='stylesheet' id='ie-only-css' href='dest/css/ie.css' />
+        <![endif]-->
+    </head>
+    <body>
+        <a href="https://github.com/Quirksmode/responsive-grids"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+        <main class="page page-home">
+            <header>
+                <div class="grid-fullwidth no-cols">
+                   <h1>Responsive Grids</h1>
+                   <p class="intro">I know, I know another Grid system, but bear with us, this one is pretty cool and we have been using it on all our large scale projects at Beyond for the last few years and thought it was time to share.</p>
+                </div>
+            </header>
+            <section>
+                <div class="grid-fullwidth no-cols">
+                    <h2>12 Column grid example</h2>
+                    <p>A basic 12 column example</p>
+                </div>
+                <div class="grid-fullwidth">
+                    <div class="col-1-1">1 of 1</div>
+                    <div class="col-1-2">1 of 2</div>
+                    <div class="col-1-2">1 of 2</div>
+                    <div class="col-1-3">1 of 3</div>
+                    <div class="col-1-3">1 of 3</div>
+                    <div class="col-1-3">1 of 3</div>
+                    <div class="col-1-4">1 of 4</div>
+                    <div class="col-1-4">1 of 4</div>
+                    <div class="col-1-4">1 of 4</div>
+                    <div class="col-1-4">1 of 4</div>
+                    <div class="col-8-12">8 of 12</div>
+                    <div class="col-4-12">4 of 12</div>
+                    <div class="col-9-12">9 of 12</div>
+                    <div class="col-3-12">3 of 12</div>
+                </div>
+                <div class="grid-fullwidth no-cols code-wrap">
+                    <h3>SCSS</h3>
+                    <pre><code class="language-scss">
+@include rg-create-grid(
+    $grid-class: "grid-fullwidth",
+    $width: 1280px,
+    $gutter: 20px,
+    $margin: 24px,
+    $columns: 12,
+    $breakpoint: "tablet"
+);
+                        </code>
+                    </pre>
+                    <h3>HTML</h3>
+                    <pre><code class="language-markup">
+&lt;div class="grid-fullwidth"&gt;
+    &lt;div class="col-1-1"&gt;1 of 1&lt;/div&gt;
+    &lt;div class="col-1-2"&gt;1 of 2&lt;/div&gt;
+    &lt;div class="col-1-2"&gt;1 of 2&lt;/div&gt;
+    &lt;div class="col-1-3"&gt;1 of 3&lt;/div&gt;
+    &lt;div class="col-1-3"&gt;1 of 3&lt;/div&gt;
+    &lt;div class="col-1-3"&gt;1 of 3&lt;/div&gt;
+    &lt;div class="col-1-4"&gt;1 of 4&lt;/div&gt;
+    &lt;div class="col-1-4"&gt;1 of 4&lt;/div&gt;
+    &lt;div class="col-1-4"&gt;1 of 4&lt;/div&gt;
+    &lt;div class="col-1-4"&gt;1 of 4&lt;/div&gt;
+    &lt;div class="col-8-12"&gt;8 of 12&lt;/div&gt;
+    &lt;div class="col-4-12"&gt;4 of 12&lt;/div&gt;
+    &lt;div class="col-9-12"&gt;9 of 12&lt;/div&gt;
+    &lt;div class="col-3-12"&gt;3 of 12&lt;/div&gt;
+&lt;/div&gt;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+            <section>
+                <div class="grid-custom no-cols">
+                   <h2>Custom grid example</h2>
+                   <p>A custom grid allows you handcraft exactly how each column will behave across the different breakpoints.</p>
+                </div>
+                <div class="grid-custom">
+                    <div class="grid-custom__col">Custom 1</div>
+                    <div class="grid-custom__col">Custom 2</div>
+                    <div class="grid-custom__col">Custom 3</div>
+                    <div class="grid-custom__col">Custom 4</div>
+                    <div class="grid-custom__col">Custom 5</div>
+                    <div class="grid-custom__col">Custom 6</div>
+                </div>
+                <div class="grid-fullwidth no-cols code-wrap">
+                    <h3>SCSS</h3>
+                    <pre><code class="language-scss">
+@include rg-create-grid(
+    $grid-class:    "grid-custom",
+    $width:         1280px,
+    $gutter:        20px,
+    $margin:        24px,
+    $column-class:  "grid-custom__col",
+    $breakpoint:    ((tablet         2)
+                    (smalldesktop    3)
+                    (desktop         4)
+                    (largedesktop    6))
+);
+                        </code>
+                    </pre>
+                    <h3>HTML</h3>
+                    <pre><code class="language-markup">
+&lt;div class="grid-custom"&gt;
+    &lt;div class="grid-custom__col"&gt;Custom 1&lt;/div&gt;
+    &lt;div class="grid-custom__col"&gt;Custom 2&lt;/div&gt;
+    &lt;div class="grid-custom__col"&gt;Custom 3&lt;/div&gt;
+    &lt;div class="grid-custom__col"&gt;Custom 4&lt;/div&gt;
+    &lt;div class="grid-custom__col"&gt;Custom 5&lt;/div&gt;
+    &lt;div class="grid-custom__col"&gt;Custom 6&lt;/div&gt;
+&lt;/div&gt;
+                    </code>
+                    </pre>
+                </div>
+            </section>
+            <section>
+                <div class="grid-fullwidth no-cols">
+                    <h2>Single column content example</h2>
+                    <p>This example shows how we can use a 'no-cols' class to avoid needing to wrap the content in a div 'col-1-1' class when the content spans one single column.</p>
+                </div>
+                <div class="grid-fullwidth no-cols">
+                    <p class="example">Full width content example</p>
+                </div>
+                <div class="grid-fullwidth no-cols code-wrap">
+                    <h3>SCSS</h3>
+                    <pre><code class="language-scss">
+@include rg-create-grid(
+    $grid-class: "grid-fullwidth",
+    $width: 1280px,
+    $gutter: 20px,
+    $margin: 24px,
+    $columns: 12,
+    $breakpoint: "tablet"
+);
+                        </code>
+                    </pre>
+                    <h3>HTML</h3>
+                    <pre><code class="language-markup">
+&lt;div class="grid-fullwidth no-cols"&gt;
+    &lt;p&gt;Example full width content&lt;/p&gt;
+&lt;/div&gt;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+            <section>
+                <div class="grid-fullwidth no-cols">
+                    <h2>Full bleed 4 Column grid example with no gutters or margins</h2>
+                    <p>A 12 column example with the gutters and margins removed</p>
+                </div>
+                <div class="grid-nogaps">
+                    <div class="col-1-1">1 of 1</div>
+                    <div class="col-1-2">1 of 2</div>
+                    <div class="col-1-2">1 of 2</div>
+                    <div class="col-1-3">1 of 3</div>
+                    <div class="col-1-3">1 of 3</div>
+                    <div class="col-1-3">1 of 3</div>
+                    <div class="col-1-4">1 of 4</div>
+                    <div class="col-1-4">1 of 4</div>
+                    <div class="col-1-4">1 of 4</div>
+                    <div class="col-1-4">1 of 4</div>
+                </div>
+                <div class="grid-fullwidth no-cols code-wrap">
+                    <h3>SCSS</h3>
+                    <pre><code class="language-scss">
+@include rg-create-grid(
+    $grid-class: "grid-nogaps",
+    $width: 1280px,
+    $gutter: 0px,
+    $margin: 0px,
+    $columns: 4,
+    $breakpoint: "tablet"
+);
+                        </code>
+                    </pre>
+                    <h3>HTML</h3>
+                    <pre><code class="language-markup">
+&lt;div class="grid-nogaps"&gt;
+    &lt;div class="col-1-1"&gt;1 of 1&lt;/div&gt;
+    &lt;div class="col-1-2"&gt;1 of 2&lt;/div&gt;
+    &lt;div class="col-1-2"&gt;1 of 2&lt;/div&gt;
+    &lt;div class="col-1-3"&gt;1 of 3&lt;/div&gt;
+    &lt;div class="col-1-3"&gt;1 of 3&lt;/div&gt;
+    &lt;div class="col-1-3"&gt;1 of 3&lt;/div&gt;
+    &lt;div class="col-1-4"&gt;1 of 4&lt;/div&gt;
+    &lt;div class="col-1-4"&gt;1 of 4&lt;/div&gt;
+    &lt;div class="col-1-4"&gt;1 of 4&lt;/div&gt;
+    &lt;div class="col-1-4"&gt;1 of 4&lt;/div&gt;
+&lt;/div&gt;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+            <section>
+                <div class="grid-fullwidth no-cols">
+                    <h2>Custom align the columns</h2>
+                    <p>An 8 column example with alternate width, margin and gutters plus custom alignment</p>
+                </div>
+                <div class="example-wrap">
+                    <div class="grid-smaller">
+                        <div class="col-1-1">1 of 1</div>
+                    </div>
+                    <div class="grid-smaller">
+                        <div class="col-1-2">1 of 2</div>
+                        <div class="col-1-2">1 of 2</div>
+                    </div>
+                    <div class="grid-smaller">
+                        <div class="col-6-8">1 of 2</div>
+                        <div class="col-1-8 a-r">1 of 8</div>
+                    </div>
+                    <div class="grid-smaller">
+                        <div class="col-1-1">1 of 3</div>
+                    </div>
+                    <div class="grid-smaller">
+                        <div class="col-1-4 a-c">1 of 4</div>
+                    </div>
+                    <div class="grid-smaller">
+                        <div class="col-6-8 a-r">6 of 8</div>
+                    </div>
+                </div>
+                <div class="grid-fullwidth no-cols code-wrap">
+                    <h3>SCSS</h3>
+                    <pre><code class="language-scss">
+@include rg-create-grid(
+    $grid-class: "grid-smaller",
+    $width: 1000px,
+    $gutter: 30px,
+    $margin: 12px,
+    $columns: 8,
+    $breakpoint: "smalldesktop"
+);
+                        </code>
+                    </pre>
+                    <h3>HTML</h3>
+                    <pre><code class="language-markup">
+&lt;div class="grid-smaller"&gt;
+    &lt;div class="col-1-1"&gt;1 of 1&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="grid-smaller"&gt;
+    &lt;div class="col-1-2"&gt;1 of 2&lt;/div&gt;
+    &lt;div class="col-1-2"&gt;1 of 2&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="grid-smaller"&gt;
+    &lt;div class="col-6-8"&gt;1 of 2&lt;/div&gt;
+    &lt;div class="col-1-8 a-r"&gt;1 of 8&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="grid-smaller"&gt;
+    &lt;div class="col-1-1"&gt;1 of 3&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="grid-smaller"&gt;
+    &lt;div class="col-1-4 a-c"&gt;1 of 4&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="grid-smaller"&gt;
+    &lt;div class="col-6-8 a-r"&gt;6 of 8&lt;/div&gt;
+&lt;/div&gt;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+        </main>
+        <script src="dest/js/prism.js"></script>
+    </body>
+</html>

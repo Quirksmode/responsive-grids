@@ -1,0 +1,199 @@
+/* *********************************************************
+ *
+ *
+ * GRID
+ *
+ *
+ * *********************************************************/
+
+@mixin rg-create-grid(
+    $grid-class: 'structure',
+    $width: 1280px,
+    $gutter: 20px,
+    $margin: 24px,
+    $columns: 12,
+    $column-class: 0, // dynamic value - number or string
+    $breakpoint: "tablet"
+    ) { // default values if parameters not specified
+
+
+    $gutter: $gutter * 2; // px
+    $structureWidth: $width - $gutter; // px
+    $gutterWidth: rg-getGutterWidth($gutter, $width);
+    $marginWidth: rg-getMarginWidth($margin, $structureWidth);
+
+    .#{$grid-class} {
+        margin: 0 auto;
+        max-width: $structureWidth + $margin;
+        width: (100% - $gutterWidth) + ($marginWidth * 2);
+
+        &.no-cols {
+            max-width: $structureWidth;
+            width: 100% - $gutterWidth;
+        }
+
+        &:after {
+            @extend .cf;
+        }
+
+
+        @if $columns > 1 {
+
+            // ----------------------------------------------------
+            // TYPE STRUCTURE GRID
+            // ----------------------------------------------------
+
+            @if type-of($breakpoint) == 'string' {
+
+                // all col elements 100%
+                [class*='col-'] {
+                  margin: 0 $marginWidth ($marginWidth*2);
+                  width: rg-getWidth($columns, $columns, $marginWidth);
+                }
+
+                @include mq($from: $breakpoint) {
+                    // Let's float these cols
+                    [class*='col-'] {
+                      float: left;
+                    }
+
+                    // Float Right
+                    .a-r {
+                        float: right;
+                    }
+
+                    // Align Center
+                    .a-c {
+                        float: none;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    // Inline Block
+                    &.i-b {
+                        font-size: 0;
+
+                        [class*='col-'] {
+                            float: none;
+                            display: inline-block;
+                            vertical-align: top;
+                        }
+                    }
+                    @include rg-calcColumns($columns, $marginWidth);
+                }
+            }
+
+            // ----------------------------------------------------
+            // TYPE ADAPTIVE GRID
+            // ----------------------------------------------------
+
+            @if type-of($breakpoint) == 'list' {
+
+                .#{$column-class} {
+                  margin: 0 $marginWidth ($marginWidth*2);
+                  width: rg-getWidth($columns, $columns, $marginWidth);
+                }
+
+                @each $bp in $breakpoint {
+                    $breakpoint-name:  nth($bp, 1);
+                    $breakpoint-column: nth($bp, 2);
+
+
+                    @include mq($from: $breakpoint-name) {
+
+                        // Should this be more dynamic e.g. 1st array item?
+                        @if $breakpoint-name == "tablet" {
+                            // Let's float these cols
+                            .#{$column-class}  {
+                              float: left;
+                            }
+
+                            // Float Right
+                            .a-r {
+                                float: right;
+                            }
+
+                            // Align Center
+                            .a-c {
+                                float: none;
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
+
+                            // Inline Block
+                            &.i-b {
+                                font-size: 0;
+
+                                .#{$column-class}  {
+                                    float: none;
+                                    display: inline-block;
+                                    vertical-align: top;
+                                }
+                            }
+                        }
+                        @include rg-calcResponsiveColumns($column-class, $marginWidth, $breakpoint-column);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* *********************************************************
+ *
+ *
+ * MIXINS
+ *
+ *
+ * *********************************************************/
+
+
+@mixin rg-calcColumns($numberOfColumns, $margin) {
+
+    @for $i from 1 through $numberOfColumns {
+
+        // divide the number of columns into the increment number and look for a whole number
+        $num: $numberOfColumns / $i;
+        $num2: round($numberOfColumns / $i);
+
+        $string: "";
+
+        @if $num == $num2 {
+            $string: ".col-1-#{$num}"
+        }
+
+        .col-#{$i}-#{$numberOfColumns}, #{$string} {
+            width: rg-getWidth($i, $numberOfColumns, $margin);
+
+        }
+    }
+}
+
+@mixin rg-calcResponsiveColumns($column-class, $margin, $col) {
+    .#{$column-class} {
+        width: rg-getWidth(1, $col, $margin);
+    }
+}
+
+
+/* *********************************************************
+ *
+ *
+ * FUNCTIONS
+ *
+ *
+ * *********************************************************/
+
+@function rg-getGutterWidth($gutter, $width) {
+    @return ($gutter / $width) * 100%; // %
+}
+
+@function rg-getMarginWidth($margin, $width) {
+    @return ((($margin / 2) / $width) * 100%); // %
+}
+
+
+@function rg-getWidth($columnCount, $totalColumns, $margin) {
+    $columnWidth: (100% - (($margin * 2) * $totalColumns)) / $totalColumns;
+    @return ($columnCount * $columnWidth) + (($margin * 2) * ($columnCount - 1));
+}
