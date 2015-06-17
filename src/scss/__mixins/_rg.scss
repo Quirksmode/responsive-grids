@@ -92,7 +92,36 @@
                 .#{$column-class} {
                   margin: 0 $marginWidth ($marginWidth*2);
                   width: rg-getWidth($columns, $columns, $marginWidth);
+                  float: left;
                 }
+
+                // Float Right
+                &.a-r {
+                    .#{$column-class} {
+                        float: right;
+                    }
+                }  
+
+                // Align Center
+                &.a-c {
+                    .#{$column-class} {
+                        float: none;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                }
+
+                // Inline Block
+                &.i-b {
+                    font-size: 0;
+
+                    .#{$column-class}  {
+                        float: none;
+                        display: inline-block;
+                        vertical-align: top;
+                    }
+                }
+              
 
                 @each $bp in $breakpoint {
                     $breakpoint-name:  nth($bp, 1);
@@ -101,37 +130,8 @@
 
                     @include mq($from: $breakpoint-name) {
 
-                        // Should this be more dynamic e.g. 1st array item?
-                        @if $breakpoint-name == "tablet" {
-                            // Let's float these cols
-                            .#{$column-class}  {
-                              float: left;
-                            }
-
-                            // Float Right
-                            .a-r {
-                                float: right;
-                            }
-
-                            // Align Center
-                            .a-c {
-                                float: none;
-                                margin-left: auto;
-                                margin-right: auto;
-                            }
-
-                            // Inline Block
-                            &.i-b {
-                                font-size: 0;
-
-                                .#{$column-class}  {
-                                    float: none;
-                                    display: inline-block;
-                                    vertical-align: top;
-                                }
-                            }
-                        }
                         @include rg-calcResponsiveColumns($column-class, $marginWidth, $breakpoint-column);
+                    
                     }
                 }
             }
@@ -147,24 +147,28 @@
  *
  * *********************************************************/
 
-
 @mixin rg-calcColumns($numberOfColumns, $margin) {
 
     @for $i from 1 through $numberOfColumns {
 
-        // divide the number of columns into the increment number and look for a whole number
-        $num: $numberOfColumns / $i;
-        $num2: round($numberOfColumns / $i);
+        @if $i > 1 {
 
-        $string: "";
+            // divide the number of columns into the increment number and look for a whole number
+            $num: $numberOfColumns / $i;
+            $num2: round($numberOfColumns / $i);
 
-        @if $num == $num2 {
-            $string: ".col-1-#{$num}"
+            // this code block will output all divisor of the $numberOfColumns
+            @if $num == $num2 {
+                @for $c from 1 through $num {
+                    .col-#{$c}-#{$num} {
+                        width: rg-getWidth($c, $num, $margin);
+                    }
+                }
+            }
         }
 
-        .col-#{$i}-#{$numberOfColumns}, #{$string} {
+        .col-#{$i}-#{$numberOfColumns} {
             width: rg-getWidth($i, $numberOfColumns, $margin);
-
         }
     }
 }
