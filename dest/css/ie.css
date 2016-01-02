@@ -1,0 +1,1361 @@
+/**
+ *
+ * This is the IE Specific core/primary stylesheet for the whole site, all other stylesheets are pulled in by this one.
+ * It compiles to assets/css/ie.css, only IE8 and below will see this file
+ * Because IE8 and below does not support media queries we have removed these and also added extra specific IE styles below.
+ *
+ * ## Usage
+ * Add to your base html file in a ie sepecific condition
+ *
+ *     <!--[if lte IE 8]>
+ *         <link rel='stylesheet' href='/path/to/file/ie.css') }}' />
+ *     <![endif]-->
+ *
+ */
+
+/* *********************************************************
+ *
+ *
+ * GRID
+ *
+ *
+ * *********************************************************/
+
+/* *********************************************************
+ *
+ *
+ * MIXINS
+ *
+ *
+ * *********************************************************/
+
+/* *********************************************************
+ *
+ *
+ * FUNCTIONS
+ *
+ *
+ * *********************************************************/
+
+/**
+ * @group css.mixins.mixins
+ *
+ * Here we define the reusable helper mixins
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__mixins/_mixins.scss";
+ *
+ *
+ * ## Additional
+ * We can also use compass which is a library of helper mixins. Here are the ones we commonly use:
+ *
+ * @example
+ *     @include transition(all 0.3s ease-out);
+ */
+
+/**
+ * Adds a size and line height and optional font family
+ * 
+ * @param {Number/String} $fontSize (1.6)
+ * @param {Number/String} $lineHeight ($fontSize * 1.5)
+ * @param {String} $fontFamily (inherit)
+ *
+ * @example
+ *     @include font(14, 16, $f-opensans);
+ * 
+ * @example
+ *     @include font(14, 16);
+ */
+
+/**
+ * Adds transparency to an element
+ *
+ * @param {string} $color
+ * @param {string} $alpha
+ *
+ * @example
+ *     @include background-transparent(#000, .8);
+ */
+
+/**
+ * @param {number} $opacity
+ *
+ * @example
+ *     @include opacity(0.5);
+ */
+
+/**
+ * Absolute Positioned
+ *
+ * @param {size} $top (auto)
+ * @param {size} $right (auto)
+ * @param {size} $bottom (auto)
+ * @param {size} $left (auto)
+ *
+ * @example
+ *     @include absPosition(5px, 20px, 10px, 15px);
+ */
+
+/**
+ * Retina Images
+ * 
+ * @param {string} $image
+ * @param {size} $width
+ * @param {size} $height
+ *
+ * @example
+ *      @include image-2x("logo2x.png", 100px, 25px);
+ */
+
+/**
+ * Visually hidden, but have it available for screen readers
+ *
+ * @example
+ *     @include vhdn;
+ */
+
+/**
+ * Remove visually hidden
+ *
+ * @example
+ *     @include vhdn-off;
+ */
+
+/**
+ * Antialias Text
+ *
+ * @example
+ *     @include anti-alias-text;
+ */
+
+/**
+ * Absolute Position Cover
+ *
+ * @example
+ *     @include abs-cover;
+ */
+
+/**
+ * Break Word
+ *
+ * @example
+ *     @include break-word;
+ */
+
+/**
+ * CSS Triangles
+ *
+ * @param $dir
+ *
+ * @example
+ *     @include triangle(down, 20px, $color-grey-2);
+ */
+
+/**
+ * @class css.base.normalize
+ *
+ * These are the reset styles for the site
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ *     @import "__base/_normalize.scss";
+ *
+ */
+
+/*! normalize.css v2.1.3 | MIT License | git.io/normalize */
+
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined in IE 8/9.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+	display: block;
+}
+
+/**
+ * Correct `inline-block` display not defined in IE 8/9.
+ */
+
+audio,
+canvas,
+video {
+	display: inline-block;
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+	display: none;
+	height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9.
+ * Hide the `template` element in IE, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+	display: none;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+
+html {
+	font-family: sans-serif; /* 1 */
+	-ms-text-size-adjust: 100%; /* 2 */
+	-webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+	margin: 0;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+	background: transparent;
+}
+
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+
+a:focus {
+	outline: thin dotted;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+
+a:active,
+a:hover {
+	outline: 0;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari 5, and Chrome.
+ */
+
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9, Safari 5, and Chrome.
+ */
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+
+b,
+strong {
+	font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+
+dfn {
+	font-style: italic;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+	box-sizing: content-box;
+	height: 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+mark {
+	background: #ff0;
+	color: #000;
+}
+
+/**
+ * Correct font family set oddly in Safari 5 and Chrome.
+ */
+
+code,
+kbd,
+pre,
+samp {
+	font-family: monospace, serif;
+	font-size: 1em;
+}
+
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+
+pre {
+	white-space: pre-wrap;
+}
+
+/**
+ * Set consistent quote types.
+ */
+
+q {
+	quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+	font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9.
+ */
+
+img {
+	border: 0;
+}
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari 5.
+ */
+
+figure {
+	margin: 0;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+	margin: 0;
+	padding: 0;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+
+legend {
+	border: 0; /* 1 */
+	padding: 0; /* 2 */
+}
+
+/**
+ * 1. Correct font family not being inherited in all browsers.
+ * 2. Correct font size not being inherited in all browsers.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+ */
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit; /* 1 */
+	font-size: 100%; /* 2 */
+	margin: 0; /* 3 */
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+button,
+input {
+	line-height: normal;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+
+button,
+select {
+	text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	-webkit-appearance: button; /* 2 */
+	cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+	cursor: default;
+}
+
+/**
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+	box-sizing: border-box; /* 1 */
+	padding: 0; /* 2 */
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+	-webkit-appearance: textfield; /* 1 */ /* 2 */
+	box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+/**
+ * 1. Remove default vertical scrollbar in IE 8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+
+textarea {
+	overflow: auto; /* 1 */
+	vertical-align: top; /* 2 */
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/**
+ * @group css.base.helpers
+ *
+ * Here we define the reusable helper classes
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__base/_helpers.scss";
+ *
+ */
+
+/**
+ * Clearfix
+ */
+
+.cf,
+.grid-fullwidth:after,
+.grid-custom:after,
+.grid-nogaps:after,
+.grid-smaller:after {
+	zoom: 1;
+}
+
+.cf:before,
+.cf:after,
+.grid-fullwidth:after,
+.grid-custom:after,
+.grid-nogaps:after,
+.grid-smaller:after {
+	content: "";
+	display: table;
+}
+
+.cf:after,
+.grid-fullwidth:after,
+.grid-custom:after,
+.grid-nogaps:after,
+.grid-smaller:after {
+	clear: both;
+}
+
+/**
+* Hidden - Hide from both screenreaders and browsers:
+*/
+
+.hdn {
+	display: none;
+	visibility: hidden;
+}
+
+/**
+* Visually Hidden
+*/
+
+.vhdn {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.vhdn-off {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	width: auto;
+}
+
+/**
+* Visually Hidden on Focus - Extends the .vhdn class to allow the element to be focusable
+*/
+
+.vhdn.focus:active,
+.vhdn.focus:focus {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	width: auto;
+}
+
+/**
+* Invisible - Hide visually and from screen readers, but maintain layout
+*/
+
+.invs {
+	visibility: hidden;
+}
+
+/**
+ *
+ * Here we define the colour variables that are used throughout the other stylesheets
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__base/_colours.scss";
+ *
+ */
+
+/**
+ *
+ * Here we define the font styles
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__base/_fonts.scss";
+ *
+ */
+
+/**
+ * The globally used html styles are declared here
+ */
+
+html {
+	font-size: 62.5%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+body {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+/**
+ * h1 styles
+ */
+
+h1 {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 50px;
+	line-height: 60px;
+}
+
+h2 {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	line-height: 34px;
+}
+
+h3 {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 26px;
+	line-height: 30px;
+}
+
+p,
+li {
+	font-size: 16px;
+	line-height: 22px;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+a,
+span,
+input,
+label,
+time,
+button,
+address {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 300;
+}
+
+/**
+ * This is for the remaining base/globally applied styles that cannot be defined in the other Base folder stylesheets (e.g. colours, fonts etc.)
+ *
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__base/base";
+ *
+ */
+
+/**
+ * Custom Resets
+ */
+
+p,
+pre,
+blockquote,
+a,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure {
+	margin: 0;
+	padding: 0;
+}
+
+/**
+ * Responsive images
+ */
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+/**
+* Fix the box sizing
+*/
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+/*------------------------------------*
+    DEFINE BREAKPOINTS
+/*------------------------------------*
+ *
+ * We are using the sass-mq mixin to allow us to define our breakpoints
+ * https://github.com/sass-mq/sass-mq
+ *
+ */
+
+/*------------------------------------*
+    RESPONSIVE VARIABLES
+/*------------------------------------*
+ *
+ * Edit these variables to define your grids. You can define your columns below
+ * Please ensure the pixels round up correctly.
+ * To calculate your grids we recommend you use http://gridcalculator.dk/
+ * Note: Gutter and Margin labels are around the wrong way on the site.
+ *
+ *
+ * @example
+ *      @include rg-create-grid(
+ *           $grid-class: "grid-fullwidth",
+ *           $width: 1280px,
+ *           $gutter: 20px,
+ *           $margin: 24px,
+ *           $columns: 12,
+ *           $breakpoint: "tablet"
+ *       );
+ *
+ */
+
+.grid-fullwidth {
+	margin: 0 auto;
+	max-width: 1264px;
+	width: 98.81048%;
+}
+
+.grid-fullwidth.no-cols {
+	max-width: 1240px;
+	width: 96.875%;
+}
+
+.grid-fullwidth [class*='col-'] {
+	margin: 0 0.96774% 1.93548%;
+	width: 98.06452%;
+}
+
+.grid-custom {
+	margin: 0 auto;
+	max-width: 1264px;
+	width: 98.81048%;
+}
+
+.grid-custom.no-cols {
+	max-width: 1240px;
+	width: 96.875%;
+}
+
+.grid-custom .grid-custom__col {
+	margin: 0 0.96774% 1.93548%;
+	width: 98.06452%;
+}
+
+.grid-nogaps {
+	margin: 0 auto;
+	max-width: 1280px;
+	width: 100%;
+}
+
+.grid-nogaps.no-cols {
+	max-width: 1280px;
+	width: 100%;
+}
+
+.grid-nogaps [class*='col-'] {
+	margin: 0 0% 0%;
+	width: 100%;
+}
+
+.grid-smaller {
+	margin: 0 auto;
+	max-width: 952px;
+	width: 95.2766%;
+}
+
+.grid-smaller.no-cols {
+	max-width: 940px;
+	width: 94%;
+}
+
+.grid-smaller [class*='col-'] {
+	margin: 0 0.6383% 1.2766%;
+	width: 98.7234%;
+}
+
+/**
+ *
+ * Use this for default page styles that apply to all pages
+ *
+ * ## Usage
+ * Import into your main file using
+ *
+ * @example
+ *     @import "__pages/page";
+ *
+ */
+
+.page {
+	padding-top: 40px;
+}
+
+.page h1 {
+	margin-bottom: 10px;
+}
+
+.page h2 {
+	margin-bottom: 5px;
+}
+
+.page p {
+	margin-bottom: 20px;
+}
+
+.page .intro {
+	width: 80%;
+}
+
+.page header,
+.page section {
+	margin-bottom: 40px;
+}
+
+.page [class*='col-'],
+.page .grid-custom__col,
+.page .example {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: 300;
+	text-align: center;
+	padding: 20px;
+	background: #f2f2f2;
+}
+
+.page [class*='grid-'] {
+	margin-bottom: 15px;
+}
+
+.page .grid-nogaps {
+	border: 1px solid #e2e2e2;
+	border-right: none;
+	border-bottom: none;
+}
+
+.page .grid-nogaps [class*='col-'] {
+	border-bottom: 1px solid #e2e2e2;
+	border-right: 1px solid #e2e2e2;
+}
+
+.page .grid-smaller {
+	margin-bottom: 0;
+}
+
+.page .example-wrap {
+	margin-bottom: 15px;
+}
+
+.page .code-wrap h3 {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 22px;
+}
+
+.page .code-wrap pre[class*="language-"],
+.page .code-wrap pre span {
+	font-size: 15px;
+	line-height: 15px;
+}
+
+.page .code-wrap pre[class*="language-"] {
+	padding: 40px 40px 0 10% !important;
+	margin-bottom: 30px;
+}
+
+/* http://prismjs.com/download.html?themes=prism-okaidia&languages=markup+css+clike+javascript+scss */
+
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	line-height: 1.5;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+@media (min-width: 30.0625em) {
+
+.grid-fullwidth [class*='col-'] {
+	float: left;
+}
+
+.grid-fullwidth .a-r {
+	float: right;
+}
+
+.grid-fullwidth .a-c {
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.grid-fullwidth.i-b {
+	font-size: 0;
+}
+
+.grid-fullwidth.i-b [class*='col-'] {
+	float: none;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.grid-fullwidth .col-1-12,
+.grid-fullwidth .col-1-12 {
+	width: 6.39785%;
+}
+
+.grid-fullwidth .col-2-12,
+.grid-fullwidth .col-1-6 {
+	width: 14.73118%;
+}
+
+.grid-fullwidth .col-3-12,
+.grid-fullwidth .col-1-4 {
+	width: 23.06452%;
+}
+
+.grid-fullwidth .col-4-12,
+.grid-fullwidth .col-1-3 {
+	width: 31.39785%;
+}
+
+.grid-fullwidth .col-5-12 {
+	width: 39.73118%;
+}
+
+.grid-fullwidth .col-6-12,
+.grid-fullwidth .col-1-2 {
+	width: 48.06452%;
+}
+
+.grid-fullwidth .col-7-12 {
+	width: 56.39785%;
+}
+
+.grid-fullwidth .col-8-12 {
+	width: 64.73118%;
+}
+
+.grid-fullwidth .col-9-12 {
+	width: 73.06452%;
+}
+
+.grid-fullwidth .col-10-12 {
+	width: 81.39785%;
+}
+
+.grid-fullwidth .col-11-12 {
+	width: 89.73118%;
+}
+
+.grid-fullwidth .col-12-12,
+.grid-fullwidth .col-1-1 {
+	width: 98.06452%;
+}
+
+.grid-custom .grid-custom__col {
+	float: left;
+}
+
+.grid-custom .a-r {
+	float: right;
+}
+
+.grid-custom .a-c {
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.grid-custom.i-b {
+	font-size: 0;
+}
+
+.grid-custom.i-b .grid-custom__col {
+	float: none;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.grid-custom .grid-custom__col {
+	width: 48.06452%;
+}
+
+.grid-nogaps [class*='col-'] {
+	float: left;
+}
+
+.grid-nogaps .a-r {
+	float: right;
+}
+
+.grid-nogaps .a-c {
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.grid-nogaps.i-b {
+	font-size: 0;
+}
+
+.grid-nogaps.i-b [class*='col-'] {
+	float: none;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.grid-nogaps .col-1-4,
+.grid-nogaps .col-1-4 {
+	width: 25%;
+}
+
+.grid-nogaps .col-2-4,
+.grid-nogaps .col-1-2 {
+	width: 50%;
+}
+
+.grid-nogaps .col-3-4 {
+	width: 75%;
+}
+
+.grid-nogaps .col-4-4,
+.grid-nogaps .col-1-1 {
+	width: 100%;
+}
+
+}
+
+@media (min-width: 48em) {
+
+.grid-custom .grid-custom__col {
+	width: 31.39785%;
+}
+
+.grid-smaller [class*='col-'] {
+	float: left;
+}
+
+.grid-smaller .a-r {
+	float: right;
+}
+
+.grid-smaller .a-c {
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.grid-smaller.i-b {
+	font-size: 0;
+}
+
+.grid-smaller.i-b [class*='col-'] {
+	float: none;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.grid-smaller .col-1-8,
+.grid-smaller .col-1-8 {
+	width: 11.2234%;
+}
+
+.grid-smaller .col-2-8,
+.grid-smaller .col-1-4 {
+	width: 23.7234%;
+}
+
+.grid-smaller .col-3-8 {
+	width: 36.2234%;
+}
+
+.grid-smaller .col-4-8,
+.grid-smaller .col-1-2 {
+	width: 48.7234%;
+}
+
+.grid-smaller .col-5-8 {
+	width: 61.2234%;
+}
+
+.grid-smaller .col-6-8 {
+	width: 73.7234%;
+}
+
+.grid-smaller .col-7-8 {
+	width: 86.2234%;
+}
+
+.grid-smaller .col-8-8,
+.grid-smaller .col-1-1 {
+	width: 98.7234%;
+}
+
+}
+
+@media (min-width: 64em) {
+
+.grid-custom .grid-custom__col {
+	width: 23.06452%;
+}
+
+}
+
+@media (min-width: 80em) {
+
+.grid-custom .grid-custom__col {
+	width: 14.73118%;
+}
+
+}
+

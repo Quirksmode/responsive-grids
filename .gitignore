@@ -1,4 +1,4 @@
 .sass-cache
 *.css.map
-dest
+#dest
 /node_modules/
